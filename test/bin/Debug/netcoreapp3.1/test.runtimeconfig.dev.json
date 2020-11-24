@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "/home/orca/.dotnet/store/|arch|/|tfm|",
-      "/home/orca/.nuget/packages"
-    ]
-  }
-}
