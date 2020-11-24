@@ -1,0 +1,13 @@
+/home/orca/a2/info/projectFinal/photo/test/bin/Debug/netcoreapp3.1/test
+/home/orca/a2/info/projectFinal/photo/test/bin/Debug/netcoreapp3.1/test.deps.json
+/home/orca/a2/info/projectFinal/photo/test/bin/Debug/netcoreapp3.1/test.runtimeconfig.json
+/home/orca/a2/info/projectFinal/photo/test/bin/Debug/netcoreapp3.1/test.runtimeconfig.dev.json
+/home/orca/a2/info/projectFinal/photo/test/bin/Debug/netcoreapp3.1/test.dll
+/home/orca/a2/info/projectFinal/photo/test/bin/Debug/netcoreapp3.1/test.pdb
+/home/orca/a2/info/projectFinal/photo/test/obj/Debug/netcoreapp3.1/test.csprojAssemblyReference.cache
+/home/orca/a2/info/projectFinal/photo/test/obj/Debug/netcoreapp3.1/test.AssemblyInfoInputs.cache
+/home/orca/a2/info/projectFinal/photo/test/obj/Debug/netcoreapp3.1/test.AssemblyInfo.cs
+/home/orca/a2/info/projectFinal/photo/test/obj/Debug/netcoreapp3.1/test.csproj.CoreCompileInputs.cache
+/home/orca/a2/info/projectFinal/photo/test/obj/Debug/netcoreapp3.1/test.dll
+/home/orca/a2/info/projectFinal/photo/test/obj/Debug/netcoreapp3.1/test.pdb
+/home/orca/a2/info/projectFinal/photo/test/obj/Debug/netcoreapp3.1/test.genruntimeconfig.cache
