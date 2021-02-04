@@ -1,0 +1,13 @@
+/home/orca/a2/info/projectFinal/photo/decouverte/obj/Debug/netcoreapp3.1/decouverte.csprojAssemblyReference.cache
+/home/orca/a2/info/projectFinal/photo/decouverte/obj/Debug/netcoreapp3.1/decouverte.AssemblyInfoInputs.cache
+/home/orca/a2/info/projectFinal/photo/decouverte/obj/Debug/netcoreapp3.1/decouverte.AssemblyInfo.cs
+/home/orca/a2/info/projectFinal/photo/decouverte/obj/Debug/netcoreapp3.1/decouverte.csproj.CoreCompileInputs.cache
+/home/orca/a2/info/projectFinal/photo/decouverte/bin/Debug/netcoreapp3.1/decouverte
+/home/orca/a2/info/projectFinal/photo/decouverte/bin/Debug/netcoreapp3.1/decouverte.deps.json
+/home/orca/a2/info/projectFinal/photo/decouverte/bin/Debug/netcoreapp3.1/decouverte.runtimeconfig.json
+/home/orca/a2/info/projectFinal/photo/decouverte/bin/Debug/netcoreapp3.1/decouverte.runtimeconfig.dev.json
+/home/orca/a2/info/projectFinal/photo/decouverte/bin/Debug/netcoreapp3.1/decouverte.dll
+/home/orca/a2/info/projectFinal/photo/decouverte/bin/Debug/netcoreapp3.1/decouverte.pdb
+/home/orca/a2/info/projectFinal/photo/decouverte/obj/Debug/netcoreapp3.1/decouverte.dll
+/home/orca/a2/info/projectFinal/photo/decouverte/obj/Debug/netcoreapp3.1/decouverte.pdb
+/home/orca/a2/info/projectFinal/photo/decouverte/obj/Debug/netcoreapp3.1/decouverte.genruntimeconfig.cache
