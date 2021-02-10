@@ -96,39 +96,6 @@ namespace decouverte
                     Console.Write("nombre de couleurs importante: ");
                     Console.WriteLine(nimportantcolors);
                     Console.WriteLine("\n IMAGE \n");
-                    // Dictionary<pixel, ConsoleColor > thecolordict= new Dictionary<pixel, ConsoleColor>();
-                    // thecolordict.Add(new pixel(0,0,0),ConsoleColor.Black);
-                    // thecolordict.Add(new pixel(0,55,218),ConsoleColor.DarkBlue);
-                    // thecolordict.Add(new pixel(58,15,221),ConsoleColor.Cyan);
-                    // thecolordict.Add(new pixel(19,150,14),ConsoleColor.DarkGreen);
-                    // thecolordict.Add(new pixel(136,23,152),ConsoleColor.DarkMagenta);
-                    // thecolordict.Add(new pixel(197,15,31),ConsoleColor.DarkRed);
-                    // thecolordict.Add(new pixel(255,255,255),ConsoleColor.White);
-                    // thecolordict.Add(new pixel(193,156,0),ConsoleColor.DarkYellow);
-                    // thecolordict.Add(new pixel(118,118,118),ConsoleColor.Gray);
-                    // thecolordict.Add(new pixel(59,120,255),ConsoleColor.Blue);
-                    // thecolordict.Add(new pixel(22,180,12),ConsoleColor.Green);
-                    // thecolordict.Add(new pixel(231,72,86),ConsoleColor.Red);
-                    // thecolordict.Add(new pixel(180,0,158),ConsoleColor.Magenta);
-                    // int multof4width = 4*(((width*(numberofbitperpxl/8))+2)/4);
-                    // for( int i = offset;i<myfile.Length;i+=multof4width){
-                    //     for(int j=i;j<i+(width*numberofbitperpxl/8);j+=numberofbitperpxl/8){
-                    //         int avg = (myfile[j]+myfile[j+1]+myfile[j+2])/3;
-                    //         ConsoleColor temp = ConsoleColor.Red;
-                    //         double small=99999999;
-                    //         foreach(pixel p in thecolordict.Keys){
-                    //             double dist=((p.R-(int)myfile[j+2])*(p.R-(int)myfile[j+2])) +((p.G-(int)myfile[j+1])*(p.G-(int)myfile[j+1])) +((p.B-(int)myfile[j])*(p.B-(int)myfile[j]));
-                    //             if( dist<small){
-                    //                 small = dist;
-                    //                 temp = thecolordict[p];
-                    //             }
-                    //         }
-                    //         Console.BackgroundColor = temp;
-                    //         Console.Write(Convert.ToString(avg).PadLeft(4));
-                    //         Console.ResetColor();
-                    //     }
-                    //     Console.WriteLine();
-                    // }
                     matrix image = new matrix(myfile, offset, width, numberofbitperpxl);
                     image.dispwithcolor();
                     break;
