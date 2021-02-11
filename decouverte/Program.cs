@@ -103,9 +103,9 @@ namespace decouverte
                     Console.Write("nombre de couleurs importante: ");
                     Console.WriteLine(nimportantcolors);
                     Console.WriteLine("\n IMAGE \n");
-                    matrix image = new matrix(myfile, offset, width, numberofbitperpxl);
+                    MyImage image = new MyImage(myfile, offset, width, numberofbitperpxl);
                     image.dispwithcolor();
-                    image.save("./images/test.bmp");
+                    image.From_Image_To_File("./images/test.bmp");
                     break;
                 case "BA":
                     Console.WriteLine(" OS/2 struct bitmap array");

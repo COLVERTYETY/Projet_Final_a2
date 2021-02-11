@@ -2,7 +2,7 @@ using System;
 using System.IO;
 namespace decouverte
 {
-    public class matrix
+    public class  MyImage
     {
         private triplet[,] data;
         public int height{
@@ -11,7 +11,7 @@ namespace decouverte
         public int width{
             get{return data.GetLength(0);}
         }
-        public matrix(byte[] arr, int start, int width, int numberofbitperpxl){
+        public  MyImage(byte[] arr, int start, int width, int numberofbitperpxl){
             int multof4width = 4*(((width*(numberofbitperpxl/8))+2)/4);
             data = new triplet[width,(arr.Length - start )/ multof4width];
             for( int i = start;i<arr.Length;i+=multof4width){
@@ -41,7 +41,7 @@ namespace decouverte
                 Console.WriteLine();
             }
         }
-        public void save(string pathName){
+        public void  From_Image_To_File(string pathName){
             // ! palettes not taken in account 
             const int headers = 54;
             int multof4width = 4*(((width*(3))+2)/4);
@@ -53,76 +53,76 @@ namespace decouverte
             file[1] = (byte)'M';
             // tottalsize
             byte[] temp = new byte[4];
-            temp = el((UInt32) totalsize, 4);
+            temp = Convertir_Int_To_Endian((UInt32) totalsize, 4);
             file[2] = temp[0];
             file[3] = temp[1];
             file[4] = temp[2];
             file[5] = temp[3];
             // name of the creating app
-            temp = el((UInt32) 42069, 4);
+            temp = Convertir_Int_To_Endian((UInt32) 42069, 4);
             file[6] = temp[0];
             file[7] = temp[1];
             file[8] = temp[2];
             file[9] = temp[3];
             // offset
-            temp = el((UInt32) headers,4);
+            temp = Convertir_Int_To_Endian((UInt32) headers,4);
             file[10] = temp[0];
             file[11] = temp[1];
             file[12] = temp[2];
             file[13] = temp[3];
             // DIB HEADER
             // sizeof this header
-            temp = el((UInt32) 40, 4);
+            temp = Convertir_Int_To_Endian((UInt32) 40, 4);
             file[14] = temp[0];
             file[15] = temp[1];
             file[16] = temp[2];
             file[17] = temp[3];
             // bitmap width
-            temp = el((UInt32)width, 4);
+            temp = Convertir_Int_To_Endian((UInt32)width, 4);
             file[18] = temp[0];
             file[19] = temp[1];
             file[20] = temp[2];
             file[21] = temp[3];
             // bitmap height
-            temp = el((UInt32) height, 4);
+            temp = Convertir_Int_To_Endian((UInt32) height, 4);
             file[22] = temp[0];
             file[23] = temp[1];
             file[24] = temp[2];
             file[25] = temp[3];
             // les color palnes (must be 1)
-            temp = el((UInt32)1, 2);
+            temp = Convertir_Int_To_Endian((UInt32)1, 2);
             file[26] = temp[0];
             file[27] = temp[1];
             // bits perpxl
-            temp = el((UInt32) 24, 2);
+            temp = Convertir_Int_To_Endian((UInt32) 24, 2);
             file[28] = temp[0];
             file[29] = temp[1];
             // compression
-            temp = el((UInt32)0, 4);
+            temp = Convertir_Int_To_Endian((UInt32)0, 4);
             file[30] = temp[0];
             file[31] = temp[1];
             file[32] = temp[2];
             file[33] = temp[3];
             // image size 
-            temp = el((UInt32) imagesize * 3, 4);
+            temp = Convertir_Int_To_Endian((UInt32) imagesize * 3, 4);
             file[34] = temp[0];
             file[35] = temp[1];
             file[36] = temp[2];
             file[37] = temp[3];
             // horizontal resolution
-            temp = el((UInt32) 1000, 4);
+            temp = Convertir_Int_To_Endian((UInt32) 1000, 4);
             file[38] = temp[0];
             file[39] = temp[1];
             file[40] = temp[2];
             file[41] = temp[3];
             // vertical resolution
-            temp = el((UInt32) 1000, 4);
+            temp = Convertir_Int_To_Endian((UInt32) 1000, 4);
             file[42] = temp[0];
             file[43] = temp[1];
             file[44] = temp[2];
             file[45] = temp[3];
             //color palette 0 par default
-            temp = el(0, 4);
+            temp = Convertir_Int_To_Endian(0, 4);
             file[46] = temp[0];
             file[47] = temp[0];
             file[48] = temp[0];
@@ -151,14 +151,14 @@ namespace decouverte
             }
             File.WriteAllBytes(pathName, file);
         }
-        static byte[] el( UInt32 input, int nbits){
+        static byte[] Convertir_Int_To_Endian( UInt32 input, int nbits){
             byte[] res = new byte[4];
             for(int i=0;i<nbits;i++){
                 res[i]=(byte)(input*Math.Pow(256,-1*i));
             }
             return res;
         }
-        static int le(byte[] arr, int pos, int nbits){
+        static int Convertir_Endian_To_Int(byte[] arr, int pos, int nbits){
             int res=0;
             for(int i=0;i<nbits;i++){
                 res+=arr[i+pos]*(int)Math.Pow(256,i);
