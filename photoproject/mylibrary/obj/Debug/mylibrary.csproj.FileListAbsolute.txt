@@ -1,6 +1,0 @@
-C:\Users\Nicolas\Desktop\photo\Projet_Final_a2\photoproject\mylibrary\bin\Debug\mylibrary.dll
-C:\Users\Nicolas\Desktop\photo\Projet_Final_a2\photoproject\mylibrary\bin\Debug\mylibrary.pdb
-C:\Users\Nicolas\Desktop\photo\Projet_Final_a2\photoproject\mylibrary\obj\Debug\mylibrary.csprojAssemblyReference.cache
-C:\Users\Nicolas\Desktop\photo\Projet_Final_a2\photoproject\mylibrary\obj\Debug\mylibrary.csproj.CoreCompileInputs.cache
-C:\Users\Nicolas\Desktop\photo\Projet_Final_a2\photoproject\mylibrary\obj\Debug\mylibrary.dll
-C:\Users\Nicolas\Desktop\photo\Projet_Final_a2\photoproject\mylibrary\obj\Debug\mylibrary.pdb

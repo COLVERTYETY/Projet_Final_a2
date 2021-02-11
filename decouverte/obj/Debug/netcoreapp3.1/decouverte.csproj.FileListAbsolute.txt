@@ -11,3 +11,16 @@
 /home/orca/a2/info/projectFinal/photo/decouverte/obj/Debug/netcoreapp3.1/decouverte.dll
 /home/orca/a2/info/projectFinal/photo/decouverte/obj/Debug/netcoreapp3.1/decouverte.pdb
 /home/orca/a2/info/projectFinal/photo/decouverte/obj/Debug/netcoreapp3.1/decouverte.genruntimeconfig.cache
+D:\Github\Projet_Final_a2\decouverte\bin\Debug\netcoreapp3.1\decouverte.exe
+D:\Github\Projet_Final_a2\decouverte\bin\Debug\netcoreapp3.1\decouverte.deps.json
+D:\Github\Projet_Final_a2\decouverte\bin\Debug\netcoreapp3.1\decouverte.runtimeconfig.json
+D:\Github\Projet_Final_a2\decouverte\bin\Debug\netcoreapp3.1\decouverte.runtimeconfig.dev.json
+D:\Github\Projet_Final_a2\decouverte\bin\Debug\netcoreapp3.1\decouverte.dll
+D:\Github\Projet_Final_a2\decouverte\bin\Debug\netcoreapp3.1\decouverte.pdb
+D:\Github\Projet_Final_a2\decouverte\obj\Debug\netcoreapp3.1\decouverte.csprojAssemblyReference.cache
+D:\Github\Projet_Final_a2\decouverte\obj\Debug\netcoreapp3.1\decouverte.csproj.CoreCompileInputs.cache
+D:\Github\Projet_Final_a2\decouverte\obj\Debug\netcoreapp3.1\decouverte.AssemblyInfoInputs.cache
+D:\Github\Projet_Final_a2\decouverte\obj\Debug\netcoreapp3.1\decouverte.AssemblyInfo.cs
+D:\Github\Projet_Final_a2\decouverte\obj\Debug\netcoreapp3.1\decouverte.dll
+D:\Github\Projet_Final_a2\decouverte\obj\Debug\netcoreapp3.1\decouverte.pdb
+D:\Github\Projet_Final_a2\decouverte\obj\Debug\netcoreapp3.1\decouverte.genruntimeconfig.cache
