@@ -22,7 +22,14 @@ namespace decouverte
         static int LE(byte[] arr, int pos, int nbits){
             int res = 0;
             for(int i = nbits;i>=0;i--){
-                res|= ((arr[pos+i])<<i*8);
+                res|= ((((Int32)arr[pos+i]))<<i*8);
+            }
+            return res;
+        }
+        static byte[] el( UInt32 input, int nbits){
+            byte[] res = new byte[4];
+            for(int i=0;i<nbits;i++){
+                res[i]=(byte)(input*Math.Pow(256,-1*i));
             }
             return res;
         }
@@ -35,7 +42,7 @@ namespace decouverte
         }
         static void Main(string[] args)
         {
-            byte[] myfile = File.ReadAllBytes("../images/smoltriangle.bmp");
+            byte[] myfile = File.ReadAllBytes("../images/xp.bmp");
             Console.WriteLine("\n Header \n");
             Console.Write("utilisation du fichier: ");
             char[] osid = new char[2]{(char)(myfile[0]),(char)(myfile[1])};
@@ -98,6 +105,7 @@ namespace decouverte
                     Console.WriteLine("\n IMAGE \n");
                     matrix image = new matrix(myfile, offset, width, numberofbitperpxl);
                     image.dispwithcolor();
+                    image.save("../images/test.bmp");
                     break;
                 case "BA":
                     Console.WriteLine(" OS/2 struct bitmap array");
