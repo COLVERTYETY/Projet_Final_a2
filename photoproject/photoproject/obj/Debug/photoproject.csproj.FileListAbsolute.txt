@@ -1,2 +1,0 @@
-C:\Users\Nicolas\Desktop\photo\Projet_Final_a2\photoproject\photoproject\obj\Debug\photoproject.csprojAssemblyReference.cache
-C:\Users\Nicolas\Desktop\photo\Projet_Final_a2\photoproject\photoproject\obj\Debug\photoproject.csproj.CoreCompileInputs.cache

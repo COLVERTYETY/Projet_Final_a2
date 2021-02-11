@@ -42,7 +42,7 @@ namespace decouverte
         }
         static void Main(string[] args)
         {
-            byte[] myfile = File.ReadAllBytes("../images/xp.bmp");
+            byte[] myfile = File.ReadAllBytes("./images/bellpeper.bmp");
             Console.WriteLine("\n Header \n");
             Console.Write("utilisation du fichier: ");
             char[] osid = new char[2]{(char)(myfile[0]),(char)(myfile[1])};
@@ -105,7 +105,7 @@ namespace decouverte
                     Console.WriteLine("\n IMAGE \n");
                     matrix image = new matrix(myfile, offset, width, numberofbitperpxl);
                     image.dispwithcolor();
-                    image.save("../images/test.bmp");
+                    image.save("./images/test.bmp");
                     break;
                 case "BA":
                     Console.WriteLine(" OS/2 struct bitmap array");
