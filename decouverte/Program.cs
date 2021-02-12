@@ -105,6 +105,7 @@ namespace decouverte
                     Console.WriteLine("\n IMAGE \n");
                     MyImage image = new MyImage(myfile, offset, width, numberofbitperpxl);
                     image.dispwithcolor();
+                    image.rescale(40,30).dispwithcolor();
                     image.From_Image_To_File("../images/test.bmp");
                     break;
                 case "BA":

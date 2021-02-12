@@ -21,7 +21,7 @@ namespace decouverte
             }
         }
         public MyImage(int _width, int _height){  //creates a blank image
-            data = new triplet[width,height];
+            data = new triplet[_width,_height];
         }
 
         public override string ToString()
@@ -168,6 +168,15 @@ namespace decouverte
                 res+=arr[i+pos]*(int)Math.Pow(256,i);
             }
             return res;
+        }
+        public MyImage rescale(int newwidth, int newheight){
+            MyImage result = new MyImage(newwidth, newheight);
+            for(int i=0;i<result.height;i++){
+                for(int j=0;j<result.width;j++){
+                    result.data[j,i] = data[(int)(((double)j/(double)newwidth)*width),(int)(((double)i/(double)newheight)*height)]; 
+                }
+            }
+            return result;
         }
     }
 }
