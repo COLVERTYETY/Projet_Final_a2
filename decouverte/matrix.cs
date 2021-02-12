@@ -12,7 +12,7 @@ namespace decouverte
             get{return data.GetLength(0);}
         }
         public  MyImage(byte[] arr, int start, int width, int numberofbitperpxl){
-            int multof4width = 4*(((width*(numberofbitperpxl/8))+2)/4);
+            int multof4width = 4*(((width*(numberofbitperpxl/8))+3)/4);
             data = new triplet[width,(arr.Length - start )/ multof4width];
             for( int i = start;i<arr.Length;i+=multof4width){
                 for(int j=i;j<i+(width*numberofbitperpxl/8);j+=numberofbitperpxl/8){
@@ -48,7 +48,7 @@ namespace decouverte
         public void  From_Image_To_File(string pathName){
             // ! palettes not taken in account 
             const int headers = 54;
-            int multof4width = 4*(((width*(3))+2)/4);
+            int multof4width = 4*(((width*(3))+3)/4);
             int imagesize = multof4width * height + 2;
             int totalsize = headers + imagesize;  // TODO  aclculate size
             byte[] file= new byte[totalsize];
@@ -174,6 +174,63 @@ namespace decouverte
             for(int i=0;i<result.height;i++){
                 for(int j=0;j<result.width;j++){
                     result.data[j,i] = data[(int)(((double)j/(double)newwidth)*width),(int)(((double)i/(double)newheight)*height)]; 
+                }
+            }
+            return result;
+        }
+        public bool inboundaries(Point a){
+            return (a.x>0) && (a.x<width) && (a.y>0) && (a.y<height); 
+        }
+
+        public MyImage rotate(double theta) {
+            //calculating coordonates of corners in new image
+            Point ocenter = new Point(this.width/2, this.height/2);
+            Point[] points = new Point[4];
+            points[0] = new Point(0, 0) - ocenter;
+            points[1] = new Point (this.width, 0) - ocenter;
+            points[2] = new Point(0, this.height) - ocenter;
+            points[3] = new Point(this.width, this.height) - ocenter;
+
+            //polar coordinates of corners + rotation
+            for(int i=0;i<points.Length;i++){
+                points[i] = Point.PolToCart(points[i].R,points[i].Theta+theta);
+            }
+            double ymax=0;
+            double ymin=99999;
+            double xmax=0;
+            double xmin=99999;
+            foreach( Point i in points){
+                if(i.y>ymax){
+                    ymax = i.y;
+                }
+                else if( ymin>i.y){
+                    ymin = i.y;
+                }
+                if(i.x>xmax){
+                    xmax = i.x;
+                }
+                else if( xmin>i.x){
+                    xmin = i.x;
+                }
+            }
+            // create blank image
+            MyImage result = new MyImage((int)(ymax-ymin),(int)(xmax-xmin));
+            // iterate threw new image and find coord of each pixel
+            Point temp;
+            pixel filler = new pixel(190,190,190);
+            Point center = new Point(result.width/2,result.height/2);
+            for(int i=0;i<result.height;i++){
+                for(int j=0;j<result.width;j++){
+                    // get a point
+                    temp = new Point(j,i) - center;
+                    // find where he was
+                    temp = Point.PolToCart(temp.R, temp.Theta - theta) + ocenter;                  // if this poiçnt is valid
+                    if(inboundaries(temp)){
+                        result.data[j,i] = data[(int)temp.y,(int)temp.x];
+                    }
+                    else{
+                        result.data[j,i] = filler;//new pixel((byte)((j*10)%255),(byte)((i*10)%255),(byte)((j*10)%255));
+                    }
                 }
             }
             return result;
