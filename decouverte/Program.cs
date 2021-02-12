@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.IO;
 using System.Collections;
@@ -42,7 +43,7 @@ namespace decouverte
         }
         static void Main(string[] args)
         {
-            byte[] myfile = File.ReadAllBytes("./images/bellpeper.bmp");
+            byte[] myfile = File.ReadAllBytes("../images/bellpeper.bmp");
             Console.WriteLine("\n Header \n");
             Console.Write("utilisation du fichier: ");
             char[] osid = new char[2]{(char)(myfile[0]),(char)(myfile[1])};
@@ -103,14 +104,14 @@ namespace decouverte
                     Console.Write("nombre de couleurs importante: ");
                     Console.WriteLine(nimportantcolors);
                     Console.WriteLine("\n IMAGE \n");
-                    MyImage image = new MyImage(myfile, offset, width, numberofbitperpxl);
+                    MyImage image = new MyImage(myfile);
                     // image.dispwithcolor();
                     // image.Mirror(true).dispwithcolor();
                     // image.Mirror(false).dispwithcolor();
                     // image.Mirror(true).Mirror(false).dispwithcolor();
                     // grey.From_Image_To_File("./images/test.bmp");
                     // image.rotate(3).rescale(25, 25).dispwithcolor();
-                    image.rotate(-3).rescale(1500, 1500).From_Image_To_File("./images/peper1.bmp");
+                   image.rescale(25,25).dispwithcolor();
                     // image.rotate(3).rescale(250, 250).From_Image_To_File("./images/peper2.bmp");
                     break;
                 case "BA":

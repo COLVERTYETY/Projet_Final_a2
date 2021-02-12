@@ -11,10 +11,21 @@ namespace decouverte
         public int width{
             get{return data.GetLength(0);}
         }
-        public  MyImage(byte[] arr, int start, int width, int numberofbitperpxl){
-            int multof4width = 4*(((width*(numberofbitperpxl/8))+3)/4);
-            data = new triplet[width,(arr.Length - start )/ multof4width];
-            for( int i = start;i<arr.Length;i+=multof4width){
+        public MyImage(byte[] arr){
+            Exception filecontcompatible = new Exception("le fichier n'est pas suporté a ce jour");
+            if(arr[0]!='B' && arr[1] != 'M'){
+                throw filecontcompatible;
+            }
+            int start = Convertir_Endian_To_Int(arr, 10, 4);
+            int numberofbitperpxl = Convertir_Endian_To_Int(arr, 28, 2);
+            if(numberofbitperpxl!=24){
+                throw filecontcompatible;
+            }
+            int imagesize = Convertir_Endian_To_Int(arr, 34, 4);
+            int _width = Convertir_Endian_To_Int(arr, 18, 4);
+            int multof4width = 4*(((_width*(numberofbitperpxl/8))+3)/4);
+            data = new triplet[_width,( imagesize )/ multof4width];
+            for( int i = start;i<(start+imagesize);i+=multof4width){
                 for(int j=i;j<i+(width*numberofbitperpxl/8);j+=numberofbitperpxl/8){
                     data[(j-i)/(numberofbitperpxl/8),(i-start)/multof4width] = new pixel(arr[j+2],arr[j+1],arr[j]);
                 }
