@@ -4,7 +4,7 @@ namespace decouverte
 {
     public class  MyImage
     {
-        private triplet[,] data;
+        public triplet[,] data;
         public int height{
             get{return data.GetLength(1);}
         }
@@ -20,6 +20,10 @@ namespace decouverte
                 }
             }
         }
+        public MyImage(int _width, int _height){  //creates a blank image
+            data = new triplet[width,height];
+        }
+
         public override string ToString()
         {
             string temp = "";
