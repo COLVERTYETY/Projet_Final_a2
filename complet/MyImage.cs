@@ -35,6 +35,9 @@ namespace complet
         public MyImage(int _width, int _height){  //creates a blank image
             data = new pixel[_width,_height];
         }
+        public MyImage(pixel[,] content){
+            data = content;
+        }
         public override string ToString()
         {
             string temp = "";
@@ -189,6 +192,15 @@ namespace complet
                 }
             }
             return result;
+        }
+        public MyImage hsvShift(pixel shift){
+            MyImage res = new MyImage(data);
+            for(int i=0;i<res.height;i++){
+                for(int j=0;j<res.width;j++){
+                    res.data[j,i].hsv = data[j,i].hsv + shift;
+                }
+            }
+            return res;
         }
         static byte[] Convertir_Int_To_Endian( UInt32 input, int nbits){
             byte[] res = new byte[4];
