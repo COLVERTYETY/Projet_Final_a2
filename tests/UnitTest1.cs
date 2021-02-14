@@ -87,6 +87,8 @@ namespace tests
         [InlineData(2)]
         [InlineData(100)]
         [InlineData(300)]
+        [InlineData(360)]
+        [InlineData(720)]
         [InlineData(-1)]
         [InlineData(-2)]
         [InlineData(-3)]
@@ -111,6 +113,28 @@ namespace tests
                     loader.fit();
                     loader.step(i/((double)tobetested.Length-1));
                     image.rotate(theta);
+                }
+                Assert.True(true);
+            }else{
+                Assert.True(false);
+            }
+            
+        }
+        [Fact]
+        public void greyscaleTest()
+        {
+            if(loadedimages.Length>0){
+                MyImage image;
+                Console.WriteLine("");
+                loading loader = new loading(Console.CursorTop);
+                loader.header = "greyscale |";
+                loader.fit();
+                for(double i=0;i<loadedimages.Length;i++){
+                    image = loadedimages[(int)i];
+                    loader.half = tobetested[(int)i].Substring(tobetested[(int)i].LastIndexOf('/')).PadRight(10);
+                    loader.fit();
+                    loader.step(i/((double)tobetested.Length-1));
+                    image.greyscale();
                 }
                 Assert.True(true);
             }else{

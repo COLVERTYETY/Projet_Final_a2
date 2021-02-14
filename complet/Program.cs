@@ -16,13 +16,13 @@ namespace complet
         {
             string path="./images/";
             if(IsLinux()){
-                path = "../images/inputs/";
+                path = "../images/";
                 Console.WriteLine("detected LINUX as the os");
             }
-            string name = "xp .bmp";
+            string name = "bellpeper.bmp";
             string total = path+name;
             MyImage image = new MyImage(File.ReadAllBytes(total));
-            image.rotate(-2).dispwithcolor();
+            image.rescale(100,100).rescale(488,488).From_Image_To_File(path+"test.bmp");
         }
     }
 }

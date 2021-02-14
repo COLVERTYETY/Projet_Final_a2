@@ -65,6 +65,9 @@ namespace complet
                 return res;
             }
         }
+        public pixel(double scalaire){
+            values = new double[1]{scalaire};
+        }
         public pixel(double r, double g, double b){
             values = new double[3]{r,g,b};
         }

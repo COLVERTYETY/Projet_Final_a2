@@ -115,6 +115,15 @@ namespace complet
             }
             File.WriteAllBytes(pathName, file);
         }
+        public MyImage greyscale(){
+            MyImage result = new MyImage(width, height);
+            for(int i=0;i<result.height;i++){
+                for(int j=0;j<result.width;j++){
+                    result.data[j,i] = new pixel(data[j,i].avg,data[j,i].avg,data[j,i].avg); 
+                }
+            }
+            return result;
+        }
         public MyImage rescale(int newwidth, int newheight){
             MyImage result = new MyImage(newwidth, newheight);
             for(int i=0;i<result.height;i++){
@@ -127,7 +136,8 @@ namespace complet
         public bool inboundaries(Point a){
             return ((int)a.x>0) && ((int)a.x<width) && ((int)a.y>0) && ((int)a.y<height); 
         }
-        public MyImage rotate(double theta) {
+        public MyImage rotate(double degrees) {
+            double theta=degrees*Math.PI/180.0;
             //calculating coordonates of corners in new image
             Point ocenter = new Point(this.width/2, this.height/2);
             Point[] points = new Point[4];
@@ -159,7 +169,7 @@ namespace complet
                 }
             }
             // create blank image
-            MyImage result = new MyImage((int)(ymax-ymin),(int)(xmax-xmin));
+            MyImage result = new MyImage((int)(xmax-xmin),(int)(ymax-ymin));
             // iterate threw new image and find coord of each pixel
             Point temp;
             pixel filler = new pixel(190,190,190);
