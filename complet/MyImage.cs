@@ -14,14 +14,13 @@ namespace complet
             get{return data.GetLength(0);}
         }
         public MyImage(byte[] arr){
-            Exception filecontcompatible = new Exception("le fichier n'est pas suporté a ce jour");
             if(arr[0]!='B' && arr[1] != 'M'){
-                throw filecontcompatible;
+                throw new Exception("ce fichier ne commence pas par BM");
             }
             int start = Convertir_Endian_To_Int(arr, 10, 4);
             int numberofbitperpxl = Convertir_Endian_To_Int(arr, 28, 2);
             if(numberofbitperpxl!=24){
-                throw filecontcompatible;
+                throw new Exception("seul les fichiers 24 bits sont supporté");
             }
             int imagesize = Convertir_Endian_To_Int(arr, 34, 4);
             int _width = Convertir_Endian_To_Int(arr, 18, 4);
@@ -126,7 +125,7 @@ namespace complet
             return result;
         }
         public bool inboundaries(Point a){
-            return (a.x>0) && (a.x<width) && (a.y>0) && (a.y<height); 
+            return ((int)a.x>0) && ((int)a.x<width) && ((int)a.y>0) && ((int)a.y<height); 
         }
         public MyImage rotate(double theta) {
             //calculating coordonates of corners in new image
@@ -172,7 +171,7 @@ namespace complet
                     // find where he was
                     temp = Point.PolToCart(temp.R, temp.Theta - theta) + ocenter;                  // if this poiçnt is valid
                     if(inboundaries(temp)){
-                        result.data[j,i] = data[(int)temp.y,(int)temp.x];
+                        result.data[j,i] = data[(int)temp.x,(int)temp.y];
                     }
                     else{
                         result.data[j,i] = filler;//new pixel((byte)((j*10)%255),(byte)((i*10)%255),(byte)((j*10)%255));

@@ -41,5 +41,9 @@ namespace complet
         public static Point PolToCart(double r, double theta, double x = 0, double y  = 0) {
             return new Point(r * Math.Cos(theta) + x, r * Math.Sin(theta) + y);
         }
+        public override string ToString()
+        {
+            return Convert.ToString((int)x)+" "+Convert.ToString((int)y);
+        }
     }
 }

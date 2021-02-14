@@ -33,7 +33,7 @@ namespace complet
             }
             Console.Write(half);
             Console.Write(Convert.ToString((int)(val*100)).PadLeft(3).PadRight(3));
-            Console.WriteLine(ender);
+            Console.Write(ender);
         }
         public  void step(int y,double val){
             Y=y;
