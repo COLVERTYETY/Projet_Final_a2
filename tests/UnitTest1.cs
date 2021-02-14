@@ -88,7 +88,7 @@ namespace tests
         [InlineData(100)]
         [InlineData(300)]
         [InlineData(360)]
-        [InlineData(720)]
+        [InlineData(720)]   
         [InlineData(-1)]
         [InlineData(-2)]
         [InlineData(-3)]
@@ -113,6 +113,41 @@ namespace tests
                     loader.fit();
                     loader.step(i/((double)tobetested.Length-1));
                     image.rotate(theta);
+                }
+                Assert.True(true);
+            }else{
+                Assert.True(false);
+            }
+            
+        }
+        [Theory]
+        [InlineData(120,1,0)]
+        [InlineData(120,1,1)]
+        [InlineData(120,0,1)]
+        [InlineData(-120,1,0)]
+        [InlineData(12,1,0.3)]
+        [InlineData(-1.5,0.3,0.7)]
+        [InlineData(0,1,1)]        
+        [InlineData(0,0.1,0.1)]
+        [InlineData(0,1,0)]        
+        [InlineData(0,0.1,0.0)]
+        [InlineData(0,0,1)]        
+        [InlineData(0,0.0,0.1)]
+        public void hsvshiftTest(double h,double s,double v)
+        {
+            if(loadedimages.Length>0){
+                MyImage image;
+                Console.WriteLine("");
+                pixel shifter = new pixel(h,s,v);
+                loading loader = new loading(Console.CursorTop);
+                loader.header = Convert.ToString(h)+" "+Convert.ToString(s)+" "+Convert.ToString(v)+" |";
+                loader.fit();
+                for(double i=0;i<loadedimages.Length;i++){
+                    image = loadedimages[(int)i];
+                    loader.half = tobetested[(int)i].Substring(tobetested[(int)i].LastIndexOf('/')).PadRight(10);
+                    loader.fit();
+                    loader.step(i/((double)tobetested.Length-1));
+                    image.hsvShift(shifter);
                 }
                 Assert.True(true);
             }else{

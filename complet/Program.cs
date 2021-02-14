@@ -34,6 +34,7 @@ namespace complet
             kernel.data[2, 1] = new pixel(1);
             kernel.data[2, 2] = new pixel(0);
             image.Convo(kernel).From_Image_To_File($"{path}convo.bmp");
+            image.hsvShift(new pixel(0,1,0)).From_Image_To_File(path+"test.bmp");
         }
     }
 }
