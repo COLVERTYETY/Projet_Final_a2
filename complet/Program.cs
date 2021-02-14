@@ -22,7 +22,18 @@ namespace complet
             string name = "bellpeper.bmp";
             string total = path+name;
             MyImage image = new MyImage(File.ReadAllBytes(total));
-            image.rescale(100,100).rescale(488,488).From_Image_To_File(path+"test.bmp");
+            MyImage kernel = new MyImage(3, 3);
+            kernel.data = new pixel[3, 3];
+            kernel.data[0, 0] = new pixel(0);
+            kernel.data[0, 1] = new pixel(1);
+            kernel.data[0, 2] = new pixel(0);
+            kernel.data[1, 0] = new pixel(1);
+            kernel.data[1, 1] = new pixel(-4);
+            kernel.data[1, 2] = new pixel(1);
+            kernel.data[2, 0] = new pixel(0);
+            kernel.data[2, 1] = new pixel(1);
+            kernel.data[2, 2] = new pixel(0);
+            image.Convo(kernel).From_Image_To_File($"{path}convo.bmp");
         }
     }
 }

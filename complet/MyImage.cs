@@ -190,6 +190,36 @@ namespace complet
             }
             return result;
         }
+        
+        public bool IsKernel()
+        {
+            if (this.height != this.width || this.height % 2 == 0) return false;
+            foreach (pixel p in this.data) if (p.Nbits < 1) return false;
+            return true;
+        }
+
+        public MyImage Convo (MyImage kernel)
+        {
+            MyImage res = this;
+            if (kernel.IsKernel())
+            {
+                res = new MyImage(this.width - kernel.height-1, this.height - kernel.height-1);
+                for (int i = kernel.height/2; i < res.height; i++) {
+                    for (int j = kernel.height/2; j < res.width; j++) {
+                        double[] temp = {0, 0, 0};
+                        for (int x = -kernel.height/2; x < kernel.height/2; x++) {
+                            for (int y = -kernel.height/2; y < kernel.height/2; y++) {
+                                temp[0] += (double)(this.data[j+x, i+y].R*kernel.data[x+kernel.height/2, y+kernel.height/2].R);
+                                temp[1] += (double)(this.data[j+x, i+y].G*kernel.data[x+kernel.height/2, y+kernel.height/2].R);
+                                temp[2] += (double)(this.data[j+x, i+y].B*kernel.data[x+kernel.height/2, y+kernel.height/2].R);
+                            }
+                        }
+                        res.data[j-kernel.height/2, i-kernel.height/2] = new pixel(temp);
+                    }
+                }
+            }
+            return res;
+        }
         static byte[] Convertir_Int_To_Endian( UInt32 input, int nbits){
             byte[] res = new byte[4];
             for(int i=0;i<nbits;i++){
