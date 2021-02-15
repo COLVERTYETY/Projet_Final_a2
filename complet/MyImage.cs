@@ -207,8 +207,8 @@ namespace complet
             if (kernel.IsKernel())
             {
                 res = new MyImage(this.width - kernel.height-1, this.height - kernel.height-1);
-                for (int i = kernel.height/2; i < res.height; i++) {
-                    for (int j = kernel.height/2; j < res.width; j++) {
+                for (int i = kernel.height/2; i < res.height + kernel.height/2; i++) {
+                    for (int j = kernel.height/2; j < res.width + kernel.height/2; j++) {
                         double[] temp = {0, 0, 0};
                         for (int x = -kernel.height/2; x < kernel.height/2; x++) {
                             for (int y = -kernel.height/2; y < kernel.height/2; y++) {
@@ -217,6 +217,9 @@ namespace complet
                                 temp[2] += (double)(this.data[j+x, i+y].B*kernel.data[x+kernel.height/2, y+kernel.height/2].R);
                             }
                         }
+                        temp[0] /= kernel.height * kernel.width;
+                        temp[1] /= kernel.height * kernel.width;
+                        temp[2] /= kernel.height * kernel.width;
                         res.data[j-kernel.height/2, i-kernel.height/2] = new pixel(temp);
                     }
                 }
