@@ -189,6 +189,13 @@ namespace complet
             }
             return new pixel(temp);
         }
+        public static pixel operator /(pixel a,double d){
+            double[] temp = new double[a.Nbits];
+            for(int i=0;i<temp.Length;i++){
+                temp[i] = a.values[i]/d;
+            }
+            return new pixel(temp);
+        }
         public static bool operator >(pixel a,double b){
             return a.NormSquared>b*b;
         }

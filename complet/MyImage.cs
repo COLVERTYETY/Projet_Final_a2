@@ -195,9 +195,69 @@ namespace complet
         }
         public MyImage hsvShift(pixel shift){
             MyImage res = new MyImage(data);
+            
             for(int i=0;i<res.height;i++){
                 for(int j=0;j<res.width;j++){
                     res.data[j,i].hsv = data[j,i].hsv + shift;
+                }
+            }
+            return res;
+        }
+        static int closestIndex(pixel p, pixel[] totest){
+            int res = 0;
+            double smallest = 99999999;
+            pixel dist;
+            for(int i=0;i<totest.Length;i++){
+                dist = p-totest[i];
+                if(dist<smallest){
+                    smallest = dist.Norm;
+                    res = i;
+                }
+            }
+            return res;
+        }
+        public MyImage fromclosest(pixel[] values){
+            MyImage res = new MyImage(width,height);
+            for(int i=0;i<height;i++){
+                    for(int j=0;j<width;j++){
+                        res.data[j,i] = values[closestIndex(data[j,i],values)];
+                    }
+                }
+            return res;
+        }
+        public pixel[] Kmeans(int k, int depth){
+            int temp = depth;
+            loading loader = new loading(Console.CursorTop);
+            loader.header = "kmeans: "+Convert.ToString(k)+" |";
+            loader.fit();
+            //initialisation des points de refs
+            pixel[] res = new pixel[k];
+            pixel[] newres = new pixel[k];
+            int[] resnumber = new int[k];
+            Random rnd = new Random();
+            for(int i=0;i<res.Length;i++){
+                res[i] = data[rnd.Next(width),rnd.Next(height)];
+                newres[i] = new pixel(0,0,0);
+                resnumber[i] = 0;
+            }
+            int stock = 0;
+            //tant que encore le droit de calculer
+            while (depth>0){
+                depth--;
+                loader.step(((double)temp-(double)depth)/(double)temp);
+                //affecter a chaque point la valeur la plus proche
+                for(int i=0;i<height;i++){
+                    for(int j=0;j<width;j++){
+                        stock = closestIndex(data[j,i],res);
+                        newres[stock] += data[j,i];
+                        resnumber[stock] +=1;
+                    }
+                }
+                //faie moyennes de centres et reinitialiser les centres des clusters
+                for(int i=0;i<newres.Length;i++){
+                    res[i] = newres[i]/(double)resnumber[i];
+                    newres[i] = new pixel(0,0,0);
+                    resnumber[i] = 0;
                 }
             }
             return res;

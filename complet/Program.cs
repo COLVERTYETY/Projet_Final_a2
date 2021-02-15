@@ -19,10 +19,23 @@ namespace complet
                 path = "../images/";
                 Console.WriteLine("detected LINUX as the os");
             }
-            string name = "bellpeper.bmp";
+            // string name = "rainbowrect.bmp";
+            // string total = path+name;
+            // MyImage image = new MyImage(File.ReadAllBytes(total));
+            // pixel shifter = new pixel(1,0,0);
+            // int width = (Console.WindowWidth/4);
+            // int height = Console.WindowHeight-1;
+            // while (true){
+            //     image = image.hsvShift(shifter);
+            //     Console.SetCursorPosition(0,0);
+            //     image.rescale(width,height).dispwithcolor();
+            // }
+            string name = "xp.bmp";
             string total = path+name;
             MyImage image = new MyImage(File.ReadAllBytes(total));
-            image.hsvShift(new pixel(0,0.1,0)).From_Image_To_File(path+"test.bmp");
+            int width = (Console.WindowWidth/4);
+            int height = Console.WindowHeight-1;
+            image.fromclosest(image.Kmeans(4,100)).From_Image_To_File(path+"test.bmp");
         }
     }
 }
