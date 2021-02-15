@@ -193,6 +193,39 @@ namespace complet
             }
             return result;
         }
+        
+        public bool IsKernel()
+        {
+            if (this.height != this.width || this.height % 2 == 0) return false;
+            foreach (pixel p in this.data) if (p.Nbits < 1) return false;
+            return true;
+        }
+
+        public MyImage Convo (MyImage kernel)
+        {
+            MyImage res = this;
+            if (kernel.IsKernel())
+            {
+                res = new MyImage(this.width - kernel.height-1, this.height - kernel.height-1);
+                for (int i = kernel.height/2; i < res.height + kernel.height/2; i++) {
+                    for (int j = kernel.height/2; j < res.width + kernel.height/2; j++) {
+                        double[] temp = {0, 0, 0};
+                        for (int x = -kernel.height/2; x < kernel.height/2; x++) {
+                            for (int y = -kernel.height/2; y < kernel.height/2; y++) {
+                                temp[0] += (double)(this.data[j+x, i+y].R*kernel.data[x+kernel.height/2, y+kernel.height/2].R);
+                                temp[1] += (double)(this.data[j+x, i+y].G*kernel.data[x+kernel.height/2, y+kernel.height/2].R);
+                                temp[2] += (double)(this.data[j+x, i+y].B*kernel.data[x+kernel.height/2, y+kernel.height/2].R);
+                            }
+                        }
+                        temp[0] /= kernel.height * kernel.width;
+                        temp[1] /= kernel.height * kernel.width;
+                        temp[2] /= kernel.height * kernel.width;
+                        res.data[j-kernel.height/2, i-kernel.height/2] = new pixel(temp);
+                    }
+                }
+            }
+            return res;
+        }
         public MyImage hsvShift(pixel shift){
             MyImage res = new MyImage(data);
             
