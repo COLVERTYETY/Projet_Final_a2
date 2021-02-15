@@ -22,7 +22,7 @@ namespace complet
             string name = "bellpeper.bmp";
             string total = path+name;
             MyImage image = new MyImage(File.ReadAllBytes(total));
-            image.hsvShift(new pixel(0,1,0)).From_Image_To_File(path+"test.bmp");
+            image.hsvShift(new pixel(0,0.1,0)).From_Image_To_File(path+"test.bmp");
         }
     }
 }
