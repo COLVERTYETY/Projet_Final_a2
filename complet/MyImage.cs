@@ -49,6 +49,13 @@ namespace complet
             }
             return temp;
         }
+        public void fill(pixel p){
+            for(int i=0;i<height;i++){
+                for(int j=0;j<width;j++){
+                    data[j,i] = p;
+                }
+            }
+        }
         public void dispwithcolor(){
             for(int i=0;i<height;i++){
                 for(int j=0;j<width;j++){
@@ -226,9 +233,63 @@ namespace complet
             }
             return res;
         }
+        public MyImage Convo (MyImage kernel, int y0,int y1)
+        {
+            MyImage res = this;
+            if (kernel.IsKernel())
+            {
+                int starty=0;
+                int endy=0;
+                if(y0 > kernel.height/2){
+                    starty = y0;
+                }else{
+                    starty = kernel.height/2;
+                }
+                if(y1 > this.height - kernel.height/2){
+                    endy = this.height - kernel.height/2;
+                }else{
+                    endy = y1;
+                }
+                res = new MyImage(this.width,y1-y0);
+                res.fill(new pixel(0,0,0));
+                //iterate threw the original image
+                for(int i=starty;i<endy;i++){
+                    for(int j=kernel.width/2;j<this.width-kernel.width/2;j++)
+                    {
+                        pixel temp = new pixel(0,0,0);
+                        //iterate threw the kernel
+                        for(int y=0;y<kernel.height;y++){
+                            for(int x=0;x<kernel.width;x++){
+                                //calcultae new pixel values
+                                temp +=this.data[j+y-kernel.height/2 ,i+x-kernel.width/2]*kernel.data[x,y].avg;
+                            }
+                        }
+                        //put this new value in the resulting image
+                        res.data[j,i-starty] = temp;
+                    }
+                }
+                
+            }
+            return res;
+        }
+        public void flattenkernel(){
+            pixel temp= new pixel(0,0,0);
+            //calculate sum
+            for(int i=0;i<height;i++){
+                for(int j=0;j<width;j++){
+                    temp+= this.data[j,i];
+                }
+            }
+            //smoothen
+            for(int i=0;i<height;i++){
+                for(int j=0;j<width;j++){
+                    this.data[j,i]/=temp;
+                }
+            }
+            
+        }
         public MyImage hsvShift(pixel shift){
             MyImage res = new MyImage(data);
-            
             for(int i=0;i<res.height;i++){
                 for(int j=0;j<res.width;j++){
                     res.data[j,i].hsv = data[j,i].hsv + shift;

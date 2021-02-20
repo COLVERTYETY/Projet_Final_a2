@@ -144,7 +144,7 @@ namespace complet
             }
         }
         public pixel(double scalaire){
-            values = new double[1]{scalaire};
+            values = new double[3]{scalaire,scalaire,scalaire};
         }
         public pixel(double r, double g, double b){
             values = new double[3]{r,g,b};
@@ -186,6 +186,13 @@ namespace complet
             double[] temp = new double[a.Nbits];
             for(int i=0;i<temp.Length;i++){
                 temp[i] = a.values[i]/b.values[i];
+            }
+            return new pixel(temp);
+        }
+        public static pixel operator *(pixel a,double d){
+            double[] temp = new double[a.Nbits];
+            for(int i=0;i<temp.Length;i++){
+                temp[i] = a.values[i]*d;
             }
             return new pixel(temp);
         }

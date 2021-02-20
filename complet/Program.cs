@@ -30,14 +30,12 @@ namespace complet
             //     Console.SetCursorPosition(0,0);
             //     image.rescale(width,height).dispwithcolor();
             // }
-            string name = "xp.bmp";
+            string name = "sharp.bmp";
             string total = path+name;
             MyImage image = new MyImage(File.ReadAllBytes(total));
-<<<<<<< HEAD
             int width = (Console.WindowWidth/4);
             int height = Console.WindowHeight-1;
-            image.fromclosest(image.Kmeans(4,100)).From_Image_To_File(path+"test.bmp");
-=======
+            //image.fromclosest(image.Kmeans(4,100)).From_Image_To_File(path+"test.bmp");
             MyImage kernel = new MyImage(5, 5);
             #region kernel
             kernel.data = new pixel[5, 5];
@@ -71,8 +69,8 @@ namespace complet
             kernel.data[4, 3] = new pixel(0);
             kernel.data[4, 4] = new pixel(0);
             #endregion
-            image.Convo(kernel).From_Image_To_File($"{path}convo.bmp");
->>>>>>> 8086d9a39455876c6cdc67a46a256a1f8879dc21
+            kernel.flattenkernel();
+            image.Convo(kernel,20,300).From_Image_To_File($"{path}convo.bmp");
         }
     }
 }
