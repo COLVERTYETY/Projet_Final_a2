@@ -36,7 +36,12 @@ namespace complet
             data = new pixel[_width,_height];
         }
         public MyImage(pixel[,] content){
-            data = content;
+            data = new pixel[content.GetLength(0),content.GetLength(1)];
+            for(int i=0;i<width;i++){
+                for(int j=0;j<height;j++){
+                    data[i,j] = content[i,j];
+                }
+            }
         }
         public override string ToString()
         {
@@ -110,9 +115,16 @@ namespace complet
             for(int j=0;j<height;j++){
                 for(int i=0;i<multof4width;i+=3){
                     if(i/3<width){
-                        temp[0] = (byte)data[i/3,j].R;
-                        temp[1] = (byte)data[i/3,j].G;
-                        temp[2] = (byte)data[i/3,j].B;
+                        if(data[i/3,j].Values!=null){
+                            temp[0] = (byte)data[i/3,j].R;
+                            temp[1] = (byte)data[i/3,j].G;
+                            temp[2] = (byte)data[i/3,j].B;
+                        }else{
+                            temp[0] = 0b0;
+                            temp[1] = 0b0;
+                            temp[2] = 0b0;
+                        }
+                        
                     }else{
                         temp[0] = 0b0;
                         temp[1] = 0b0;
@@ -145,6 +157,9 @@ namespace complet
         }
         public bool inboundaries(Point a){
             return ((int)a.x>0) && ((int)a.x<width) && ((int)a.y>0) && ((int)a.y<height); 
+        }
+        public bool inboundaries(double x, double y){
+            return ((int)x>0) && ((int)x<width) && ((int)y>0) && ((int)y<height); 
         }
         public MyImage rotate(double degrees) {
             double theta=degrees*Math.PI/180.0;
@@ -233,11 +248,12 @@ namespace complet
             }
             return res;
         }
-        public MyImage Convo (MyImage kernel, int y0,int y1)
+        public MyImage convo(MyImage kernel, int y0,int y1)
         {
             MyImage res = this;
             if (kernel.IsKernel())
             {
+                //image stuff
                 int starty=0;
                 int endy=0;
                 if(y0 > kernel.height/2){
@@ -250,18 +266,19 @@ namespace complet
                 }else{
                     endy = y1;
                 }
-                res = new MyImage(this.width,y1-y0);
-                res.fill(new pixel(0,0,0));
+                res = new MyImage(this.width-kernel.width,endy-starty);
+                //res.fill(new pixel(0,0,0));
                 //iterate threw the original image
+                pixel temp;
                 for(int i=starty;i<endy;i++){
-                    for(int j=kernel.width/2;j<this.width-kernel.width/2;j++)
+                    for(int j=0;j<res.width;j++)
                     {
-                        pixel temp = new pixel(0,0,0);
+                        temp = new pixel(0,0,0);
                         //iterate threw the kernel
                         for(int y=0;y<kernel.height;y++){
                             for(int x=0;x<kernel.width;x++){
                                 //calcultae new pixel values
-                                temp +=this.data[j+y-kernel.height/2 ,i+x-kernel.width/2]*kernel.data[x,y].avg;
+                                temp +=this.data[j+x ,i+y-kernel.height/2]*kernel.data[x,y].avg;
                             }
                         }
                         //put this new value in the resulting image
@@ -313,11 +330,24 @@ namespace complet
         public MyImage fromclosest(pixel[] values){
             MyImage res = new MyImage(width,height);
             for(int i=0;i<height;i++){
-                    for(int j=0;j<width;j++){
-                        res.data[j,i] = values[closestIndex(data[j,i],values)];
+                for(int j=0;j<width;j++){
+                    res.data[j,i] = values[closestIndex(data[j,i],values)];
+                }
+            }
+            return res;
+        }
+        public void blit(MyImage other, int x,int y){
+            int newx;
+            int newy;
+            for(int i=0;i<other.height;i++){
+                for(int j=0;j<other.width;j++){
+                    newx = j+x;
+                    newy = i+y;
+                    if(inboundaries(newx,newy)){
+                        data[newx,newy] = other.data[j,i];
                     }
                 }
-            return res;
+            }
         }
         public pixel[] Kmeans(int k, int depth){
             int temp = depth;

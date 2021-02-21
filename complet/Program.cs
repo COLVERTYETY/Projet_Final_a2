@@ -30,7 +30,7 @@ namespace complet
             //     Console.SetCursorPosition(0,0);
             //     image.rescale(width,height).dispwithcolor();
             // }
-            string name = "sharp.bmp";
+            string name = "sunset.bmp";
             string total = path+name;
             MyImage image = new MyImage(File.ReadAllBytes(total));
             int width = (Console.WindowWidth/4);
@@ -70,7 +70,12 @@ namespace complet
             kernel.data[4, 4] = new pixel(0);
             #endregion
             kernel.flattenkernel();
-            image.Convo(kernel,20,300).From_Image_To_File($"{path}convo.bmp");
+            Console.WriteLine("about to start.....");
+            //image.convo(kernel, 0,1000).From_Image_To_File($"{path}convo.bmp");
+            threadMachine a = new threadMachine(image);
+            //a.Nthreads = 8;
+            a.optimiseThreadCount();
+            a.convo(kernel).From_Image_To_File($"{path}convo.bmp");
         }
     }
 }
