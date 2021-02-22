@@ -39,14 +39,12 @@ namespace complet
             for(int i=0;i<Nthreads;i++){
                 thethreads[i].Start();
             }
-            res.fill(new pixel(0,0,0));
             // join / wait for all the threads to finish and reduce as we go allong
-            foreach(Thread t in thethreads){
-                t.Join();
-            }
-            Console.WriteLine("joined !!");
-            foreach(threadWorker t in theWorkers){
-                res.blit(t.result,t.x,t.y);
+            for(int i=0;i<Nthreads;i++){
+                thethreads[i].Join();
+                Console.WriteLine("Joined a thread !!");
+                res.blit(theWorkers[i].result,theWorkers[i].x,theWorkers[i].y);
+                Console.WriteLine("blitfinished");
             }
             return res;
         }

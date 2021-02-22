@@ -7,11 +7,11 @@ using System.Threading;
 namespace complet
 {
     class Program{
-    static bool IsLinux()
-    {
-        int p = (int) Environment.OSVersion.Platform;
-        return (p == 4) || (p == 6) || (p == 128);
-    }
+        static bool IsLinux()
+        {
+            int p = (int) Environment.OSVersion.Platform;
+            return (p == 4) || (p == 6) || (p == 128);
+        }
         static void Main(string[] args)
         {
             string path="./images/";
@@ -36,44 +36,19 @@ namespace complet
             int width = (Console.WindowWidth/4);
             int height = Console.WindowHeight-1;
             //image.fromclosest(image.Kmeans(4,100)).From_Image_To_File(path+"test.bmp");
-            MyImage kernel = new MyImage(5, 5);
-            #region kernel
-            kernel.data = new pixel[5, 5];
-            kernel.data[0, 0] = new pixel(0);
-            kernel.data[0, 1] = new pixel(0);
-            kernel.data[0, 2] = new pixel(0);
-            kernel.data[0, 3] = new pixel(0);
-            kernel.data[0, 4] = new pixel(0);
-
-            kernel.data[1, 0] = new pixel(0);
-            kernel.data[1, 1] = new pixel(1);
-            kernel.data[1, 2] = new pixel(1);
-            kernel.data[1, 3] = new pixel(1);
-            kernel.data[1, 4] = new pixel(0);
-
-            kernel.data[2, 0] = new pixel(0);
-            kernel.data[2, 1] = new pixel(1);
-            kernel.data[2, 2] = new pixel(1);
-            kernel.data[2, 3] = new pixel(1);
-            kernel.data[2, 4] = new pixel(0);
-
-            kernel.data[3, 0] = new pixel(0);
-            kernel.data[3, 1] = new pixel(1);
-            kernel.data[3, 2] = new pixel(1);
-            kernel.data[3, 3] = new pixel(1);
-            kernel.data[3, 4] = new pixel(0);
-
-            kernel.data[4, 0] = new pixel(0);
-            kernel.data[4, 1] = new pixel(0);
-            kernel.data[4, 2] = new pixel(0);
-            kernel.data[4, 3] = new pixel(0);
-            kernel.data[4, 4] = new pixel(0);
-            #endregion
+            double[,] content = new double[,]{
+                {0,0,0,0,0},
+                {0,1,1,1,0},
+                {0,1,1,1,0},
+                {0,1,1,1,0},
+                {0,0,0,0,0},
+                }; 
+            MyImage kernel = new MyImage(content);
             kernel.flattenkernel();
             Console.WriteLine("about to start.....");
-            //image.convo(kernel, 0,1000).From_Image_To_File($"{path}convo.bmp");
+            //kernel.From_Image_To_File($"{path}convo.bmp");
             threadMachine a = new threadMachine(image);
-            //a.Nthreads = 8;
+            //a.Nthreads = 1;
             a.optimiseThreadCount();
             a.convo(kernel).From_Image_To_File($"{path}convo.bmp");
         }

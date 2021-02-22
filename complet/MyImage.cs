@@ -1,17 +1,18 @@
 using System;
+using System.Text;
 using System.IO;
 
 namespace complet
 {
     public class MyImage
     {
-        public pixel[,] data;
+        public pixel[][] data;// why not [,] ? because jagged arrays have faster read spee when used properly
 
         public int height{
-            get{return data.GetLength(1);}
+            get{return data.Length;}
         }
         public int width{
-            get{return data.GetLength(0);}
+            get{return data[0].Length;}
         }
         public MyImage(byte[] arr){
             if(arr[0]!='B' && arr[1] != 'M'){
@@ -25,47 +26,68 @@ namespace complet
             int imagesize = Convertir_Endian_To_Int(arr, 34, 4);
             int _width = Convertir_Endian_To_Int(arr, 18, 4);
             int multof4width = 4*(((_width*(numberofbitperpxl/8))+3)/4);
-            data = new pixel[_width,( imagesize )/ multof4width];
+            //initialise the contents of data as empty
+            data = new pixel[( imagesize )/ multof4width][];
+            for(int i=0;i<data.Length;i++){
+                data[i] = new pixel[_width];
+            }
             for( int i = start;i<(start+imagesize);i+=multof4width){
                 for(int j=i;j<i+(width*numberofbitperpxl/8);j+=numberofbitperpxl/8){
-                    data[(j-i)/(numberofbitperpxl/8),(i-start)/multof4width] = new pixel(arr[j+2],arr[j+1],arr[j]);
+                    data[(i-start)/multof4width][(j-i)/(numberofbitperpxl/8)] = new pixel(arr[j+2],arr[j+1],arr[j]);
                 }
             }
         }
         public MyImage(int _width, int _height){  //creates a blank image
-            data = new pixel[_width,_height];
+            data = new pixel[_height][];
+            for(int i=0;i<_height;i++){
+                data[i] = new pixel[_width];
+            }
         }
-        public MyImage(pixel[,] content){
-            data = new pixel[content.GetLength(0),content.GetLength(1)];
-            for(int i=0;i<width;i++){
-                for(int j=0;j<height;j++){
-                    data[i,j] = content[i,j];
+        public MyImage(pixel[][] content){
+            data = new pixel[content.Length][];
+            int temp=0;
+            if(content.Length>0){
+                temp = content[0].Length;
+            }
+            for(int i=0;i<data.Length;i++){
+                data[i] = new pixel[temp];
+                for(int j=0;j<temp;j++){
+                    data[i][j] = content[i][j];
+                }
+            }
+        }
+        public MyImage(double[,] content){
+            data = new pixel[content.GetLength(0)][];
+            for(int i=0;i<content.GetLength(0);i++){
+                data[i] = new pixel[content.GetLength(1)];
+                for(int j=0;j<content.GetLength(1);j++){
+                    data[i][j] = new pixel(content[i,j]);
                 }
             }
         }
         public override string ToString()
         {
-            string temp = "";
+            StringBuilder temp = new StringBuilder(" ");
             for(int i=0;i<height;i++){
                 for(int j=0;j<width;j++){
-                    temp+=Convert.ToString((int)data[j,i].avg).PadLeft(4);
+                    temp.Append(Convert.ToString((int)data[i][j].avg).PadLeft(4));
                 }
-                temp+="\n";
+                temp.Append("\n");
             }
-            return temp;
+            return Convert.ToString(temp);
         }
         public void fill(pixel p){
             for(int i=0;i<height;i++){
                 for(int j=0;j<width;j++){
-                    data[j,i] = p;
+                    data[i][j] = p;
                 }
             }
         }
         public void dispwithcolor(){
             for(int i=0;i<height;i++){
                 for(int j=0;j<width;j++){
-                    Console.ForegroundColor = colormachine.closestmatch(data[j,i]);
-                    Console.Write( Convert.ToString((int)data[j,i].avg).PadLeft(4));
+                    Console.ForegroundColor = colormachine.closestmatch(data[i][j]);
+                    Console.Write( Convert.ToString((int)data[i][j].avg).PadLeft(4));
                     Console.ResetColor();
                 }
                 Console.WriteLine();
@@ -115,16 +137,9 @@ namespace complet
             for(int j=0;j<height;j++){
                 for(int i=0;i<multof4width;i+=3){
                     if(i/3<width){
-                        if(data[i/3,j].Values!=null){
-                            temp[0] = (byte)data[i/3,j].R;
-                            temp[1] = (byte)data[i/3,j].G;
-                            temp[2] = (byte)data[i/3,j].B;
-                        }else{
-                            temp[0] = 0b0;
-                            temp[1] = 0b0;
-                            temp[2] = 0b0;
-                        }
-                        
+                    temp[0] = (byte)data[j][i/3].R;
+                    temp[1] = (byte)data[j][i/3].G;
+                    temp[2] = (byte)data[j][i/3].B;
                     }else{
                         temp[0] = 0b0;
                         temp[1] = 0b0;
@@ -141,7 +156,7 @@ namespace complet
             MyImage result = new MyImage(width, height);
             for(int i=0;i<result.height;i++){
                 for(int j=0;j<result.width;j++){
-                    result.data[j,i] = new pixel(data[j,i].avg,data[j,i].avg,data[j,i].avg); 
+                    result.data[i][j] = new pixel(data[i][j].avg,data[i][j].avg,data[i][j].avg); 
                 }
             }
             return result;
@@ -150,7 +165,7 @@ namespace complet
             MyImage result = new MyImage(newwidth, newheight);
             for(int i=0;i<result.height;i++){
                 for(int j=0;j<result.width;j++){
-                    result.data[j,i] = data[(int)(((double)j/(double)newwidth)*width),(int)(((double)i/(double)newheight)*height)]; 
+                    result.data[i][j] = data[(int)(((double)i/(double)newheight)*height)][(int)(((double)j/(double)newwidth)*width)]; 
                 }
             }
             return result;
@@ -206,10 +221,10 @@ namespace complet
                     // find where he was
                     temp = Point.PolToCart(temp.R, temp.Theta - theta) + ocenter;                  // if this poiçnt is valid
                     if(inboundaries(temp)){
-                        result.data[j,i] = data[(int)temp.x,(int)temp.y];
+                        result.data[i][j] = data[(int)temp.y][(int)temp.x];
                     }
                     else{
-                        result.data[j,i] = filler;//new pixel((byte)((j*10)%255),(byte)((i*10)%255),(byte)((j*10)%255));
+                        result.data[i][j] = filler;
                     }
                 }
             }
@@ -219,7 +234,7 @@ namespace complet
         public bool IsKernel()
         {
             if (this.height != this.width || this.height % 2 == 0) return false;
-            foreach (pixel p in this.data) if (p.Nbits < 1) return false;
+            // foreach (pixel p in this.data) if (p.Nbits < 1) return false; //! this should be deleted but haven done it in respect for antoine tete
             return true;
         }
 
@@ -234,15 +249,15 @@ namespace complet
                         double[] temp = {0, 0, 0};
                         for (int x = -kernel.height/2; x < kernel.height/2; x++) {
                             for (int y = -kernel.height/2; y < kernel.height/2; y++) {
-                                temp[0] += (double)(this.data[j+x, i+y].R*kernel.data[x+kernel.height/2, y+kernel.height/2].R);
-                                temp[1] += (double)(this.data[j+x, i+y].G*kernel.data[x+kernel.height/2, y+kernel.height/2].R);
-                                temp[2] += (double)(this.data[j+x, i+y].B*kernel.data[x+kernel.height/2, y+kernel.height/2].R);
+                                temp[0] += (double)(this.data[i+y][j+x].R*kernel.data[y+kernel.height/2][x+kernel.height/2].R);
+                                temp[1] += (double)(this.data[i+y][j+x].G*kernel.data[y+kernel.height/2][x+kernel.height/2].R);
+                                temp[2] += (double)(this.data[i+y][j+x].B*kernel.data[y+kernel.height/2][x+kernel.height/2].R);
                             }
                         }
                         temp[0] /= kernel.height * kernel.width;
                         temp[1] /= kernel.height * kernel.width;
                         temp[2] /= kernel.height * kernel.width;
-                        res.data[j-kernel.height/2, i-kernel.height/2] = new pixel(temp);
+                        res.data[ i-kernel.height/2][j-kernel.height/2] = new pixel(temp);
                     }
                 }
             }
@@ -267,22 +282,21 @@ namespace complet
                     endy = y1;
                 }
                 res = new MyImage(this.width-kernel.width,endy-starty);
-                //res.fill(new pixel(0,0,0));
                 //iterate threw the original image
-                pixel temp;
+                pixel sum;
                 for(int i=starty;i<endy;i++){
-                    for(int j=0;j<res.width;j++)
-                    {
-                        temp = new pixel(0,0,0);
+                    for(int j=0;j<res.width;j++){
+                        sum = new pixel(0,0,0);
                         //iterate threw the kernel
                         for(int y=0;y<kernel.height;y++){
                             for(int x=0;x<kernel.width;x++){
                                 //calcultae new pixel values
-                                temp +=this.data[j+x ,i+y-kernel.height/2]*kernel.data[x,y].avg;
+                                sum += data[i+y-kernel.height/2][j+x]*kernel.data[y][x];
+                                //?Console.WriteLine(data[i+y-kernel.height/2][j+x]);
                             }
                         }
                         //put this new value in the resulting image
-                        res.data[j,i-starty] = temp;
+                        res.data[i-starty][j] = sum;
                     }
                 }
                 
@@ -294,13 +308,14 @@ namespace complet
             //calculate sum
             for(int i=0;i<height;i++){
                 for(int j=0;j<width;j++){
-                    temp+= this.data[j,i];
+                    temp+= data[i][j];
                 }
             }
             //smoothen
+            pixel inverted = new pixel(1)/temp;
             for(int i=0;i<height;i++){
                 for(int j=0;j<width;j++){
-                    this.data[j,i]/=temp;
+                    data[i][j]*=inverted;
                 }
             }
             
@@ -309,7 +324,7 @@ namespace complet
             MyImage res = new MyImage(data);
             for(int i=0;i<res.height;i++){
                 for(int j=0;j<res.width;j++){
-                    res.data[j,i].hsv = data[j,i].hsv + shift;
+                    res.data[i][j].hsv = data[i][j].hsv + shift;
                 }
             }
             return res;
@@ -331,7 +346,7 @@ namespace complet
             MyImage res = new MyImage(width,height);
             for(int i=0;i<height;i++){
                 for(int j=0;j<width;j++){
-                    res.data[j,i] = values[closestIndex(data[j,i],values)];
+                    res.data[i][j] = values[closestIndex(data[i][j],values)];
                 }
             }
             return res;
@@ -344,7 +359,7 @@ namespace complet
                     newx = j+x;
                     newy = i+y;
                     if(inboundaries(newx,newy)){
-                        data[newx,newy] = other.data[j,i];
+                        data[newy][newx] = other.data[i][j];
                     }
                 }
             }
@@ -360,7 +375,7 @@ namespace complet
             int[] resnumber = new int[k];
             Random rnd = new Random();
             for(int i=0;i<res.Length;i++){
-                res[i] = data[rnd.Next(width),rnd.Next(height)];
+                res[i] = data[rnd.Next(height)][rnd.Next(width)];
                 newres[i] = new pixel(0,0,0);
                 resnumber[i] = 0;
             }
@@ -372,8 +387,8 @@ namespace complet
                 //affecter a chaque point la valeur la plus proche
                 for(int i=0;i<height;i++){
                     for(int j=0;j<width;j++){
-                        stock = closestIndex(data[j,i],res);
-                        newres[stock] += data[j,i];
+                        stock = closestIndex(data[i][j],res);
+                        newres[stock] += data[i][j];
                         resnumber[stock] +=1;
                     }
                 }

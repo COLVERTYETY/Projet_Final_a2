@@ -4,45 +4,36 @@ namespace complet
 {
     public struct pixel
     {
-        private double[] values;
-        public int Nbits{
-            get{return values.Length;}
-        }
-        public double[] Values{
-            get{return values;}
-            set{
-                values = value; 
-            }
-        }
+        public double r,g,b;
         public byte R{
             get{
-                return (byte)values[0];
+                return (byte)r;
             }
             set{
-                values[0] = value;
+                r = value;
             }
         }
         public byte G{
             get{
-                return (byte)values[1];
+                return (byte)g;
             }
             set{
-                values[1] = value;
+                g = value;
             }
         }
         public byte B{
             get{
-                return (byte)values[2];
+                return (byte)b;
             }
             set{
-                values[2] = value;
+                b = value;
             }
         }
         public pixel hsv{
             get{
-                double r_ = values[0]/255;
-                double g_ = values[1]/255;
-                double b_ = values[2]/255;
+                double r_ = r/255;
+                double g_ = g/255;
+                double b_ = b/255;
                 double cmax = max(r_,max(g_,b_));
                 double cmin = min(r_,min(g_,b_));
                 double delta = cmax-cmin;
@@ -69,9 +60,9 @@ namespace complet
                 return new pixel(Hue,s,v);
             }
             set{
-                double h = value.values[0];
-                double s = value.values[1];
-                double v = value.values[2];
+                double h = value.r;
+                double s = value.g;
+                double v = value.b;
                 double c = v*s;
                 double x = c*(1-Math.Abs(((h/60)%2) - 1));
                 double m = v-c;
@@ -111,97 +102,66 @@ namespace complet
                         b_ = x;
                     break;
                 }
-                R = (byte)((r_+m)*255);
-                G = (byte)((g_+m)*255);
-                B = (byte)((b_+m)*255);
+                r = ((r_+m)*255)%255;
+                g = ((g_+m)*255)%255;
+                b = ((b_+m)*255)%255;
             }
         }   
         public double avg{
             get{
-                double res=0;
-                for(int i=0;i<values.Length;i++){
-                    res += values[i];
-                }
-                return res/(double)values.Length;
+                return (r+g+b)/3.0;
             }
         }
         public double Norm{
             get{
-                double res = 0;
-                for(int i=0;i<values.Length;i++){
-                    res += values[i]*values[i];
-                }
-                return Math.Sqrt(res);
+                return Math.Sqrt((r*r)+(g*g)+(b*b));
             }
         }
         public double NormSquared{
             get{
-                double res = 0;
-                for(int i=0;i<values.Length;i++){
-                    res += values[i]*values[i];
-                }
-                return res;
+                return (r*r)+(g*g)+(b*b);
             }
         }
         public pixel(double scalaire){
-            values = new double[3]{scalaire,scalaire,scalaire};
+            r = scalaire;
+            g = scalaire;
+            b = scalaire;
         }
-        public pixel(double r, double g, double b){
-            values = new double[3]{r,g,b};
+        public pixel(double _r, double _g, double _b){
+            r = _r;
+            g = _g;
+            b = _b;
         }
         public pixel(double[] arr){
-            values = arr;
+            r = arr[0];
+            g = arr[1];
+            b = arr[2];
         }
-        public pixel(double[] arr, int offset, int nbits){
-            values = new double[nbits];
-            for(int i=0;i<nbits;i++){
-                values[i] = arr[offset+i];
-            }
+        public pixel(double[] arr, int offset){
+            r = arr[offset];
+            g = arr[offset+1];
+            b = arr[offset+2];
         }
         public override string ToString(){
-            return string.Join(':',values);
+            return Convert.ToString(r)+":"+Convert.ToString(g)+":"+Convert.ToString(b);
         }
         public static pixel operator +(pixel a,pixel b){
-            double[] temp = new double[a.Nbits];
-            for(int i=0;i<temp.Length;i++){
-                temp[i] = a.values[i]+b.values[i];
-            }
-            return new pixel(temp);
+            return new pixel(a.r+b.r,a.g+b.g,a.b+b.b);
         }
         public static pixel operator -(pixel a,pixel b){
-            double[] temp = new double[a.Nbits];
-            for(int i=0;i<temp.Length;i++){
-                temp[i] = a.values[i]-b.values[i];
-            }
-            return new pixel(temp);
+            return new pixel(a.r-b.r,a.g-b.g,a.b-b.b);
         }
         public static pixel operator *(pixel a,pixel b){
-            double[] temp = new double[a.Nbits];
-            for(int i=0;i<temp.Length;i++){
-                temp[i] = a.values[i]*b.values[i];
-            }
-            return new pixel(temp);
+            return new pixel(a.r*b.r,a.g*b.g,a.b*b.b);
         }
         public static pixel operator /(pixel a,pixel b){
-            double[] temp = new double[a.Nbits];
-            for(int i=0;i<temp.Length;i++){
-                temp[i] = a.values[i]/b.values[i];
-            }
-            return new pixel(temp);
+            return new pixel(a.r/b.r,a.g/b.g,a.b/b.b);
         }
         public static pixel operator *(pixel a,double d){
-            double[] temp = new double[a.Nbits];
-            for(int i=0;i<temp.Length;i++){
-                temp[i] = a.values[i]*d;
-            }
-            return new pixel(temp);
+            return new pixel(a.r*d,a.g*d,a.b*d);
         }
         public static pixel operator /(pixel a,double d){
-            double[] temp = new double[a.Nbits];
-            for(int i=0;i<temp.Length;i++){
-                temp[i] = a.values[i]/d;
-            }
-            return new pixel(temp);
+            return new pixel(a.r/d,a.g/d,a.b/d);
         }
         public static bool operator >(pixel a,double b){
             return a.NormSquared>b*b;
