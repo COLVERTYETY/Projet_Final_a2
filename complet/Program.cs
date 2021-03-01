@@ -31,7 +31,7 @@ namespace complet
             //     Console.SetCursorPosition(0,0);
             //     image.rescale(width,height).dispwithcolor();
             // }
-            string name = "kid.bmp";
+            string name = "1.bmp";
             string total = path+name;
             MyImage image = new MyImage(total);
             int width = (Console.WindowWidth/4);
@@ -46,7 +46,7 @@ namespace complet
             kernel.flattenkernel();
             Console.WriteLine("about to start.....");
             //kernel.From_Image_To_File($"{path}convo.bmp");
-            threadMachine a = new threadMachine(image);
+            threadMachine a = new threadMachine(image.rescale(10000,10000));
             //a.Nthreads = 1;
             a.optimiseThreadCount();
             Stopwatch chrono = new Stopwatch();
