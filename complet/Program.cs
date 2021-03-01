@@ -46,13 +46,14 @@ namespace complet
             kernel.flattenkernel();
             Console.WriteLine("about to start.....");
             //kernel.From_Image_To_File($"{path}convo.bmp");
-            threadMachine a = new threadMachine(image.rescale(10000,10000));
+            //threadMachine a = new threadMachine(image.rescale(10000,10000));
             //a.Nthreads = 1;
-            a.optimiseThreadCount();
+            //a.optimiseThreadCount();
             Stopwatch chrono = new Stopwatch();
             chrono.Start();
-            a.convo(kernel).From_Image_To_File($"{path}convo.bmp");
+            //a.convo(kernel).From_Image_To_File($"{path}convo.bmp");
             //new MyImage(File.ReadAllBytes(path+"sharp.bmp")).rotate(200).From_Image_To_File($"{path}convo.bmp");
+            image.rescale(7000,7000).Mandelbrot(0.2,0.18,0.4,-0.18).From_Image_To_File($"{path}test.bmp");
             chrono.Stop();
             Console.WriteLine(chrono.Elapsed);
         }

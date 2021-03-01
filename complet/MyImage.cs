@@ -352,6 +352,45 @@ namespace complet
             }
             return res;
         }
+        public MyImage noiretblanc(){
+            pixel[] arr = new pixel[]{new pixel(0,0,0),new pixel(255,255,255)};
+            return this.fromclosest(arr);
+        }
+        public static double Map(double value, double fromSource, double toSource, double fromTarget, double toTarget)
+        {
+            return (value - fromSource) / (toSource - fromSource) * (toTarget - fromTarget) + fromTarget;
+        }
+        public MyImage Mandelbrot(double X0,double Y0,double X1,double Y1){
+            MyImage res = new MyImage(width,height);
+            double x2 =0;
+            double y2 =0;
+            double x0 =0;
+            double y0 =0;
+            double x =0;
+            double y =0;
+            int it=0;
+            const int maxit=1000;
+            for(int i=0;i<height;i++){
+                for(int j=0;j<width;j++){
+                    x0 = Map(j,0,width,X0,X1);
+                    y0 = Map(i,0,height,Y0,Y1);
+                    x=0;
+                    y=0;
+                    x2=0;
+                    y2=0;
+                    it=0;
+                    while((it<maxit)&&(x2+y2<=4)){
+                        y = 2*x*y+y0;
+                        x = x2 - y2 +x0;
+                        x2 = x*x;
+                        y2 = y*y;
+                        it++;
+                    }
+                    res.data[i][j].hsv=new pixel(it*360/maxit,1,1);
+                }
+            }
+            return res;
+        }
         public void blit(MyImage other, int x,int y){
             int newx;
             int newy;
