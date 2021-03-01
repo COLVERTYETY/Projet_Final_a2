@@ -3,6 +3,7 @@ images/convo.bmp
 complet/obj/**
 complet/obj/*
 complet/obj/
+complet/.vscode/
 complet/bin/**
 complet/bin/*
 complet/bin/
