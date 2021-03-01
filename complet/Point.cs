@@ -3,7 +3,7 @@ using System;
 namespace complet
 {
 
-    public class Point
+    public struct Point
     {
 
         public double x;

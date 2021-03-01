@@ -10,6 +10,7 @@ namespace complet
         public MyImage result;
         public MyImage source;
         public MyImage kernel;
+        public MyImage output;
         public bool finished = false;
 
         public threadWorker(MyImage _source){
@@ -18,6 +19,7 @@ namespace complet
         public void convo(){
             finished = false;
             result =  source.convo(kernel,y,y+height);
+            //output.blit(result,x,y);
             finished = true;
         }
         public override string  ToString(){

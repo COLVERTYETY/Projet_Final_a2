@@ -14,7 +14,8 @@ namespace complet
         public int width{
             get{return data[0].Length;}
         }
-        public MyImage(byte[] arr){
+        public MyImage(string path){
+            byte [] arr = File.ReadAllBytes(path);
             if(arr[0]!='B' && arr[1] != 'M'){
                 throw new Exception("ce fichier ne commence pas par BM");
             }

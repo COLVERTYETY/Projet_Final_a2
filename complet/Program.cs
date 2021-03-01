@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
 
@@ -30,18 +31,16 @@ namespace complet
             //     Console.SetCursorPosition(0,0);
             //     image.rescale(width,height).dispwithcolor();
             // }
-            string name = "sunset.bmp";
+            string name = "kid.bmp";
             string total = path+name;
-            MyImage image = new MyImage(File.ReadAllBytes(total));
+            MyImage image = new MyImage(total);
             int width = (Console.WindowWidth/4);
             int height = Console.WindowHeight-1;
             //image.fromclosest(image.Kmeans(4,100)).From_Image_To_File(path+"test.bmp");
             double[,] content = new double[,]{
-                {0,0,0,0,0},
-                {0,1,1,1,0},
-                {0,1,1,1,0},
-                {0,1,1,1,0},
-                {0,0,0,0,0},
+                {1,1,1},
+                {1,1,1},
+                {1,1,1}
                 }; 
             MyImage kernel = new MyImage(content);
             kernel.flattenkernel();
@@ -50,7 +49,12 @@ namespace complet
             threadMachine a = new threadMachine(image);
             //a.Nthreads = 1;
             a.optimiseThreadCount();
+            Stopwatch chrono = new Stopwatch();
+            chrono.Start();
             a.convo(kernel).From_Image_To_File($"{path}convo.bmp");
+            //new MyImage(File.ReadAllBytes(path+"sharp.bmp")).rotate(200).From_Image_To_File($"{path}convo.bmp");
+            chrono.Stop();
+            Console.WriteLine(chrono.Elapsed);
         }
     }
 }

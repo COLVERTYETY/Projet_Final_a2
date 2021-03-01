@@ -25,12 +25,13 @@ namespace complet
             //initilasie teh threads then map
             Console.WriteLine("begin init the trheas");
             for(int i=0;i<Nthreads;i++){
-                threadWorker temp = new threadWorker(new MyImage(source.data));
+                threadWorker temp = new threadWorker(source);
                 temp.x = kernel.width/2;
                 temp.height = (int)(((double)1/(double)Nthreads)*(double)source.height)+(kernel.height/2);
                 temp.y = (int)(((double)i/((double)Nthreads))*(double)source.height);
                 temp.kernel = new MyImage(kernel.data);
                 theWorkers[i] = temp;
+                theWorkers[i].output = res;
                 thethreads[i] = new Thread(new ThreadStart(temp.convo));
                 thethreads[i].Priority = ThreadPriority.Highest;
             }

@@ -1,0 +1,13 @@
+images/bellpeper.bmp
+images/inputs/bellpeper.bmp
+images/inputs/sharp .bmp
+images/inputs/sunset.bmp
+images/inputs/trianglecolor .bmp
+images/inputs/xp .bmp
+images/mediumtri.bmp
+images/rainbowrect.bmp
+images/rickroll.bmp
+images/sharp.bmp
+images/smolrick.bmp
+images/smoltriangle.bmp
+images/test.bmp
