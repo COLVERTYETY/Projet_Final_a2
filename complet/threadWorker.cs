@@ -12,7 +12,7 @@ namespace complet
         public MyImage kernel;
         public MyImage output;
         public bool finished = false;
-
+        public double[] param;
         public threadWorker(MyImage _source){
             source = _source;
         }
@@ -20,6 +20,16 @@ namespace complet
             finished = false;
             result =  source.convo(kernel,y,y+height);
             //output.blit(result,x,y);
+            finished = true;
+        }
+        public void Mandelbrot(){
+            finished = false;
+            result =  source.Mandelbrot(param[0],param[1],param[2],param[3]);
+            Console.Write("start blit  ");
+            Console.Write(y);
+            Console.Write(" ");
+            Console.WriteLine(param[3]-param[1]);
+            output.blit(result,x,y);
             finished = true;
         }
         public override string  ToString(){
