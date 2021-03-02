@@ -20,42 +20,16 @@ namespace complet
                 path = "../images/";
                 Console.WriteLine("detected LINUX as the os");
             }
-            // string name = "rainbowrect.bmp";
-            // string total = path+name;
-            // MyImage image = new MyImage(File.ReadAllBytes(total));
-            // pixel shifter = new pixel(1,0,0);
-            // int width = (Console.WindowWidth/4);
-            // int height = Console.WindowHeight-1;
-            // while (true){
-            //     image = image.hsvShift(shifter);
-            //     Console.SetCursorPosition(0,0);
-            //     image.rescale(width,height).dispwithcolor();
-            // }
             string name = "1.bmp";
             string total = path+name;
             MyImage image = new MyImage(total);
-            int width = (Console.WindowWidth/4);
-            int height = Console.WindowHeight-1;
-            //image.fromclosest(image.Kmeans(4,100)).From_Image_To_File(path+"test.bmp");
-            double[,] content = new double[,]{
-                {1,1,1},
-                {1,1,1},
-                {1,1,1}
-                }; 
-            MyImage kernel = new MyImage(content);
-            kernel.flattenkernel();
-            Console.WriteLine("about to start.....");
-            //kernel.From_Image_To_File($"{path}convo.bmp");
-            threadMachine a = new threadMachine(new MyImage(13000,13000));
-            //a.Nthreads = 1;
-            a.optimiseThreadCount();
-            Stopwatch chrono = new Stopwatch();
-            chrono.Start();
-            //a.convo(kernel).From_Image_To_File($"{path}convo.bmp");
-            a.Mandelbrot(-0.7353, 0.1027,-0.7553, 0.1227).From_Image_To_File($"{path}Mandel.bmp");
+            (new FileInfo("outputs")).Directory.Create();
+            image.greyscale().From_Image_To_File($"{path}outputs/gris.bmp");
+            image.noiretblanc().From_Image_To_File($"{path}outputs/noiretblanc.bmp");
+            image.rotate(30).From_Image_To_File($"{path}outputs/rotation.bmp");
+            image.rescale(1000,1000).From_Image_To_File($"{path}outputs/resize.bmp");
+            //image.Miror().From_Image_To_File($"{path}output/resize.bmp");
             //image.rescale(5000,5000).Mandelbrot(0.22,0.10,0.32,-0.10).From_Image_To_File($"{path}test.bmp");
-            chrono.Stop();
-            Console.WriteLine(chrono.Elapsed);
         }
     }
 }
