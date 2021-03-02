@@ -171,6 +171,17 @@ namespace complet
             }
             return result;
         }
+
+        public MyImage mirror(bool vertical = true) {
+            MyImage res = new MyImage(this.width, this.height);
+            for (int i = 0 ; i < res.height ; i++) {
+                for (int j = 0 ; j < res.width ; j++) {
+                    res.data[i][j] = vertical ? this.data[i][this.width - 1 - j] : this.data[this.height -1 - i][j];
+                }
+            }
+            return res;
+        }
+
         public bool inboundaries(Point a){
             return ((int)a.x>0) && ((int)a.x<width) && ((int)a.y>0) && ((int)a.y<height); 
         }
@@ -369,7 +380,7 @@ namespace complet
             double x =0;
             double y =0;
             int it=0;
-            const int maxit=1000;
+            const int maxit=2000;
             for(int i=0;i<height;i++){
                 for(int j=0;j<width;j++){
                     x0 = Map(j,0,width,X0,X1);

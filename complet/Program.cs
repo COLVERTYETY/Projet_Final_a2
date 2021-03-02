@@ -15,7 +15,7 @@ namespace complet
         }
         static void Main(string[] args)
         {
-            string path="./images/";
+            string path="../images/";
             if(IsLinux()){
                 path = "../images/";
                 Console.WriteLine("detected LINUX as the os");
@@ -31,9 +31,11 @@ namespace complet
             //     Console.SetCursorPosition(0,0);
             //     image.rescale(width,height).dispwithcolor();
             // }
-            string name = "1.bmp";
+            string name = "bellpeper.bmp";
             string total = path+name;
             MyImage image = new MyImage(total);
+            image.mirror().From_Image_To_File($"{path}mirror.bmp");
+            /*
             int width = (Console.WindowWidth/4);
             int height = Console.WindowHeight-1;
             //image.fromclosest(image.Kmeans(4,100)).From_Image_To_File(path+"test.bmp");
@@ -46,16 +48,17 @@ namespace complet
             kernel.flattenkernel();
             Console.WriteLine("about to start.....");
             //kernel.From_Image_To_File($"{path}convo.bmp");
-            threadMachine a = new threadMachine(new MyImage(13000,13000));
+            threadMachine a = new threadMachine(new MyImage(11000,11000));
             //a.Nthreads = 1;
             a.optimiseThreadCount();
             Stopwatch chrono = new Stopwatch();
             chrono.Start();
             //a.convo(kernel).From_Image_To_File($"{path}convo.bmp");
-            a.Mandelbrot(-0.7353, 0.1027,-0.7553, 0.1227).From_Image_To_File($"{path}Mandel.bmp");
+            a.Mandelbrot(-0.721, 0.237, -0.723, 0.239).From_Image_To_File($"{path}Mandel.bmp");
             //image.rescale(5000,5000).Mandelbrot(0.22,0.10,0.32,-0.10).From_Image_To_File($"{path}test.bmp");
             chrono.Stop();
             Console.WriteLine(chrono.Elapsed);
+            */
         }
     }
 }
