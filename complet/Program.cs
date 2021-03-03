@@ -20,7 +20,7 @@ namespace complet
                 path = "../images/";
                 Console.WriteLine("detected LINUX as the os");
             }
-            string name = "sharp.bmp";
+            string name = "1.bmp";
             string total = path+name;
             MyImage image = new MyImage(total);
             // int[] test = new int[]{9,14,26,69};
@@ -35,7 +35,7 @@ namespace complet
                 {-1,-1,-1}
             };
             MyImage kernel = new MyImage(k);
-            image.convo(kernel).polarise(0).From_Image_To_File($"{path}test.bmp");
+            image.fromclosest(image.Kmeans(8,100)).From_Image_To_File($"{path}test.bmp");
             //image.rescale(5000,5000).Mandelbrot(0.22,0.10,0.32,-0.10).From_Image_To_File($"{path}test.bmp");
         }
     }
