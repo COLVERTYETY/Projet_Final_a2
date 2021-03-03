@@ -157,6 +157,18 @@ namespace complet
         public static pixel operator /(pixel a,pixel b){
             return new pixel(a.r/b.r,a.g/b.g,a.b/b.b);
         }
+        public static bool operator ==(pixel a, pixel b){
+            return a.r==b.r && a.g==b.g && a.b==b.b;
+        }
+        public static bool operator >(pixel a, pixel b){
+            return a.r>b.r && a.g>b.g && a.b>b.b;
+        }
+        public static bool operator <(pixel a, pixel b){
+            return a.r<b.r && a.g<b.g && a.b<b.b;
+        }
+        public static bool operator !=(pixel a, pixel b){
+            return a.r!=b.r && a.g!=b.g && a.b!=b.b;
+        }
         public static pixel operator *(pixel a,double d){
             return new pixel(a.r*d,a.g*d,a.b*d);
         }

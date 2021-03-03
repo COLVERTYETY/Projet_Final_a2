@@ -171,6 +171,17 @@ namespace complet
             }
             return result;
         }
+
+        public MyImage mirror(bool vertical = true) {
+            MyImage res = new MyImage(this.width, this.height);
+            for (int i = 0 ; i < res.height ; i++) {
+                for (int j = 0 ; j < res.width ; j++) {
+                    res.data[i][j] = vertical ? this.data[i][this.width - 1 - j] : this.data[this.height -1 - i][j];
+                }
+            }
+            return res;
+        }
+
         public bool inboundaries(Point a){
             return ((int)a.x>0) && ((int)a.x<width) && ((int)a.y>0) && ((int)a.y<height); 
         }
@@ -239,31 +250,6 @@ namespace complet
             return true;
         }
 
-        public MyImage Convo (MyImage kernel)
-        {
-            MyImage res = this;
-            if (kernel.IsKernel())
-            {
-                res = new MyImage(this.width - kernel.height-1, this.height - kernel.height-1);
-                for (int i = kernel.height/2; i < res.height + kernel.height/2; i++) {
-                    for (int j = kernel.height/2; j < res.width + kernel.height/2; j++) {
-                        double[] temp = {0, 0, 0};
-                        for (int x = -kernel.height/2; x < kernel.height/2; x++) {
-                            for (int y = -kernel.height/2; y < kernel.height/2; y++) {
-                                temp[0] += (double)(this.data[i+y][j+x].R*kernel.data[y+kernel.height/2][x+kernel.height/2].R);
-                                temp[1] += (double)(this.data[i+y][j+x].G*kernel.data[y+kernel.height/2][x+kernel.height/2].R);
-                                temp[2] += (double)(this.data[i+y][j+x].B*kernel.data[y+kernel.height/2][x+kernel.height/2].R);
-                            }
-                        }
-                        temp[0] /= kernel.height * kernel.width;
-                        temp[1] /= kernel.height * kernel.width;
-                        temp[2] /= kernel.height * kernel.width;
-                        res.data[ i-kernel.height/2][j-kernel.height/2] = new pixel(temp);
-                    }
-                }
-            }
-            return res;
-        }
         public MyImage convo(MyImage kernel, int y0,int y1)
         {
             MyImage res = this;
@@ -282,6 +268,38 @@ namespace complet
                 }else{
                     endy = y1;
                 }
+                res = new MyImage(this.width-kernel.width,endy-starty);
+                //iterate threw the original image
+                pixel sum;
+                for(int i=starty;i<endy;i++){
+                    for(int j=0;j<res.width;j++){
+                        sum = new pixel(0,0,0);
+                        //iterate threw the kernel
+                        for(int y=0;y<kernel.height;y++){
+                            for(int x=0;x<kernel.width;x++){
+                                //calcultae new pixel values
+                                sum += data[i+y-kernel.height/2][j+x]*kernel.data[y][x];
+                                //?Console.WriteLine(data[i+y-kernel.height/2][j+x]);
+                            }
+                        }
+                        //put this new value in the resulting image
+                        res.data[i-starty][j] = sum;
+                    }
+                }
+                
+            }
+            return res;
+        }
+        public MyImage convo(MyImage kernel)
+        {
+            MyImage res = this;
+            if (kernel.IsKernel())
+            {
+                //image stuff
+                int starty=0;
+                int endy=0;
+                starty = kernel.height/2;
+                endy = this.height - kernel.height/2;
                 res = new MyImage(this.width-kernel.width,endy-starty);
                 //iterate threw the original image
                 pixel sum;
@@ -352,6 +370,22 @@ namespace complet
             }
             return res;
         }
+        public MyImage polarise(double val){
+            pixel noir = new pixel(0);
+            pixel blanc = new pixel(255);
+            pixel refer = new pixel(val);
+            MyImage res = new MyImage(width,height);
+            for(int i=0;i<height;i++){
+                for(int j=0;j<width;j++){
+                    if(data[i][j]>refer){
+                        res.data[i][j] = blanc;
+                    }else{
+                        res.data[i][j] = noir;
+                    }
+                }
+            }
+            return res;
+        }
         public MyImage noiretblanc(){
             pixel[] arr = new pixel[]{new pixel(0,0,0),new pixel(255,255,255)};
             return this.fromclosest(arr);
@@ -369,7 +403,7 @@ namespace complet
             double x =0;
             double y =0;
             int it=0;
-            const int maxit=1000;
+            const int maxit=2000;
             for(int i=0;i<height;i++){
                 for(int j=0;j<width;j++){
                     x0 = Map(j,0,width,X0,X1);
@@ -400,6 +434,22 @@ namespace complet
                     newy = i+y;
                     if(inboundaries(newx,newy)){
                         data[newy][newx] = other.data[i][j];
+                    }
+                }
+            }
+        }
+        public void blit(MyImage other, int x,int y, pixel key){
+            int newx;
+            int newy;
+            for(int i=0;i<other.height;i++){
+                for(int j=0;j<other.width;j++){
+                    newx = j+x;
+                    newy = i+y;
+                    if(inboundaries(newx,newy)){
+                        if(other.data[i][j]!=key){
+                            data[newy][newx] = other.data[i][j];
+                        }
+                        
                     }
                 }
             }
