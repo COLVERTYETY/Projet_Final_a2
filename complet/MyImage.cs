@@ -22,11 +22,11 @@ namespace complet
             int start = Convertir_Endian_To_Int(arr, 10, 4);
             int numberofbitperpxl = Convertir_Endian_To_Int(arr, 28, 2);
             if(numberofbitperpxl!=24){
-                throw new Exception("seul les fichiers 24 bits sont supporté");
+                throw new Exception("seul les fichiers 24 bits sont supportés");
             }
-            int imagesize = Convertir_Endian_To_Int(arr, 34, 4);
             int _width = Convertir_Endian_To_Int(arr, 18, 4);
             int multof4width = 4*(((_width*(numberofbitperpxl/8))+3)/4);
+            int imagesize = Convertir_Endian_To_Int(arr, 22, 4) * multof4width;
             //initialise the contents of data as empty
             data = new pixel[( imagesize )/ multof4width][];
             for(int i=0;i<data.Length;i++){
@@ -454,6 +454,42 @@ namespace complet
                 }
             }
         }
+
+        public MyImage hidden(MyImage hidden) {
+            MyImage res = new MyImage(this.data);
+            if (this.height != hidden.height || this.width != hidden.width) {
+                double factor = (Math.Abs(this.height - hidden.height) > Math.Abs(this.width - hidden.width)) ? (double)hidden.height / (double)this.height : (double)hidden.width / (double)this.width;
+                res = res.rescale((int)(res.width * factor), (int)(res.height * factor));
+            }
+            for(int i = 0; i < res.height; i++) {
+                for(int j = 0; j < res.width; j++) {
+                    if (!(i < (res.height-hidden.height)/2 || i >= res.height-(res.height-hidden.height)/2 || j < (res.width-hidden.width)/2 || j >= res.width-(res.width-hidden.width)/2)) {
+                        res.data[i][j].R = (byte)((res.data[i][j].R >> 4 << 4) + (hidden.data[i-(res.height-hidden.height)/2][j-(res.width-hidden.width)/2].R >> 4));
+                        res.data[i][j].G = (byte)((res.data[i][j].G >> 4 << 4) + (hidden.data[i-(res.height-hidden.height)/2][j-(res.width-hidden.width)/2].G >> 4));
+                        res.data[i][j].B = (byte)((res.data[i][j].B >> 4 << 4) + (hidden.data[i-(res.height-hidden.height)/2][j-(res.width-hidden.width)/2].B >> 4));
+                    }
+                    else {
+                        res.data[i][j].R = (byte)((res.data[i][j].R >> 4 << 4));
+                        res.data[i][j].G = (byte)((res.data[i][j].G >> 4 << 4));
+                        res.data[i][j].B = (byte)((res.data[i][j].B >> 4 << 4));
+                    }
+                }
+            }
+            return res;
+        }
+
+        public MyImage findHidden() {
+            MyImage res = new MyImage(this.width, this.height);
+            for(int i = 0; i < this.height; i++) {
+                for(int j = 0; j < this.width; j++) {
+                    res.data[i][j].R = (byte)((this.data[i][j].R & 0x0F) << 4);
+                    res.data[i][j].G = (byte)((this.data[i][j].G & 0x0F) << 4);
+                    res.data[i][j].B = (byte)((this.data[i][j].B & 0x0F) << 4);
+                }
+            }
+            return res;
+        }
+
         public pixel[] Kmeans(int k, int depth){
             int temp = depth;
             loading loader = new loading(Console.CursorTop);

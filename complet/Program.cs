@@ -20,22 +20,25 @@ namespace complet
                 path = "../images/";
                 Console.WriteLine("detected LINUX as the os");
             }
-            string name = "sharp.bmp";
+            string name = "bellpeper.bmp";
             string total = path+name;
             MyImage image = new MyImage(total);
+            MyImage toBeHidden = new MyImage(path+"rickroll.bmp");
+            image.hidden(toBeHidden).From_Image_To_File(path+"hidden.bmp");
+            image.hidden(toBeHidden).findHidden().From_Image_To_File(path+"notHiddenAnymore.bmp");
             // int[] test = new int[]{9,14,26,69};
             // test=qrcode.encodeReedSalomon(test);
             // Console.WriteLine(String.Join(' ',test));
             // test[1] = 18;
             // test = qrcode.decodeReedSalomon(test);
             // Console.WriteLine(String.Join(' ',test));
-            double[,] k = new double[,]{
-                {-1,-1,-1},
-                {-1,8,-1},
-                {-1,-1,-1}
-            };
-            MyImage kernel = new MyImage(k);
-            image.convo(kernel).polarise(0).From_Image_To_File($"{path}test.bmp");
+            // double[,] k = new double[,]{
+            //     {-1,-1,-1},
+            //     {-1,8,-1},
+            //     {-1,-1,-1}
+            // };
+            // MyImage kernel = new MyImage(k);
+            // image.convo(kernel).polarise(0).From_Image_To_File($"{path}test.bmp");
             //image.rescale(5000,5000).Mandelbrot(0.22,0.10,0.32,-0.10).From_Image_To_File($"{path}test.bmp");
         }
     }
