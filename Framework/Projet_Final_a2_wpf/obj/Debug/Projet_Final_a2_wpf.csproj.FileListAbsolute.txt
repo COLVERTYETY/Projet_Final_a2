@@ -1,0 +1,17 @@
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\bin\Debug\Projet_Final_a2_wpf.exe.config
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\bin\Debug\Projet_Final_a2_wpf.exe
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\bin\Debug\Projet_Final_a2_wpf.pdb
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\Projet_Final_a2_wpf.csprojAssemblyReference.cache
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\MainWindow.g.cs
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\App.g.cs
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\Projet_Final_a2_wpf_MarkupCompile.cache
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\Projet_Final_a2_wpf_MarkupCompile.lref
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\MainWindow.baml
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\Projet_Final_a2_wpf.g.resources
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\Projet_Final_a2_wpf.Properties.Resources.resources
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\Projet_Final_a2_wpf.csproj.GenerateResource.cache
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\Projet_Final_a2_wpf.csproj.CoreCompileInputs.cache
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\Projet_Final_a2_wpf.exe
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\Projet_Final_a2_wpf.pdb
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\UserControl1.g.cs
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\UserControl1.baml
