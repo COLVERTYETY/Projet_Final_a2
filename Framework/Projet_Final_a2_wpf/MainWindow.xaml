@@ -23,9 +23,9 @@
                 <MenuItem Header="Informations"/>
             </MenuItem>
             <MenuItem Header="Edition">
-                <MenuItem Header="Echelle" Click="CallResize" Name="ResizeMenu"/>
+                <MenuItem Header="Echelle" Click="CallResize"/>
                 <MenuItem Header="Rotation"/>
-                <MenuItem Header="Mirroir"/>
+                <MenuItem Header="Mirroir" Click="CallMirror"/>
                 <MenuItem Header="Couper"/>
             </MenuItem>
             <MenuItem Header="Filtre de convolution">
@@ -41,7 +41,7 @@
             <MenuItem Header="Mandelbrot"/>
             <MenuItem Header="A propos"/>
         </Menu>
-        <ContentControl Grid.Column="0" Grid.Row="1" Name="theUserControl" Content="ça marche pas encore"/>
+        <ContentControl Grid.Column="0" Grid.Row="1" Name="theUserControl"/>
         <Image HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" x:Name="ImageViewer" Grid.Column="1" Grid.Row="1"/>
     </Grid>
 </Window>

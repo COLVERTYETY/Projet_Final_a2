@@ -54,6 +54,11 @@ namespace Projet_Final_a2_wpf
             Console.WriteLine("oui");
         }
 
+        private void CallMirror(object sender, RoutedEventArgs e)
+        {
+            theUserControl.Content = new MiroirControl();
+        }
+
         private void CallResize(object sender, RoutedEventArgs e)
         {
             theUserControl.Content = new UserControl1();

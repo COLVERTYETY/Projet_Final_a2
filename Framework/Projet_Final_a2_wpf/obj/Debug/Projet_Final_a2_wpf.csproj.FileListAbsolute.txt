@@ -15,3 +15,7 @@ D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\Projet_Final_a
 D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\Projet_Final_a2_wpf.pdb
 D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\UserControl1.g.cs
 D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\UserControl1.baml
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\MiroirControl.g.cs
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\MiroirControl.baml
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\DefaultControl.g.cs
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\DefaultControl.baml
