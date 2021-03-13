@@ -13,9 +13,9 @@ D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\Projet_Final_a
 D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\Projet_Final_a2_wpf.csproj.CoreCompileInputs.cache
 D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\Projet_Final_a2_wpf.exe
 D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\Projet_Final_a2_wpf.pdb
-D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\UserControl1.g.cs
-D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\UserControl1.baml
 D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\MiroirControl.g.cs
 D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\MiroirControl.baml
-D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\DefaultControl.g.cs
-D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\DefaultControl.baml
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\EchelleControl.g.cs
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\EchelleControl.baml
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\RotationControl.g.cs
+D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\obj\Debug\RotationControl.baml

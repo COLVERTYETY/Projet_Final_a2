@@ -56,16 +56,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DefaultControl.xaml.cs">
-      <DependentUpon>DefaultControl.xaml</DependentUpon>
+    <Compile Include="EchelleControl.xaml.cs">
+      <DependentUpon>EchelleControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="MiroirControl.xaml.cs">
       <DependentUpon>MiroirControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl1.xaml.cs">
-      <DependentUpon>UserControl1.xaml</DependentUpon>
+    <Compile Include="RotationControl.xaml.cs">
+      <DependentUpon>RotationControl.xaml</DependentUpon>
     </Compile>
-    <Page Include="DefaultControl.xaml">
+    <Page Include="EchelleControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -85,7 +85,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl1.xaml">
+    <Page Include="RotationControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

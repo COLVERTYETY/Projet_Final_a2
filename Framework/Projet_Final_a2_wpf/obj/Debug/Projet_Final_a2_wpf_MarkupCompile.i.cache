@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Github\Projet_Final_a2\Framework\Projet_Final_a2_wpf\App.xaml
-3-38085432
+4-1991203310
 
-81807194586
+9-459490411
 14-1290796308
-MainWindow.xaml;MiroirControl.xaml;UserControl1.xaml;
+EchelleControl.xaml;MainWindow.xaml;MiroirControl.xaml;RotationControl.xaml;
 
-False
+True
 

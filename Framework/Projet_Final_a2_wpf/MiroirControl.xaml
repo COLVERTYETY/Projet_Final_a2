@@ -11,7 +11,7 @@
             <CheckBox Content="Vertical" Name="VerticalCheck" Margin="2,5" Click="Vertical_Click" IsChecked="True"/>
             <CheckBox Content="Horizontal" Name="HorizontalCheck" Margin="2,5" Click="Horizontal_Click"/>
             <Button Content="Valider" Margin="2,5"/>
-            <Image MinHeight="200" MinWidth="200" Margin="5"/>
+            <Image MinHeight="200" MinWidth="200" Margin="5" Name="preview"/>
         </StackPanel>
     </Grid>
 </UserControl>

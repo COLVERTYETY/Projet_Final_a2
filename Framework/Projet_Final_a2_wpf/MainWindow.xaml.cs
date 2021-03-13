@@ -61,7 +61,12 @@ namespace Projet_Final_a2_wpf
 
         private void CallResize(object sender, RoutedEventArgs e)
         {
-            theUserControl.Content = new UserControl1();
+            theUserControl.Content = new EchelleControl();
+        }
+
+        private void CallRotate(object sender, RoutedEventArgs e)
+        {
+            theUserControl.Content = new RotationControl();
         }
     }
 }
