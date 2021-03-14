@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using System.IO;
 using System.Windows.Forms;
 using System.ComponentModel;
-
+using complet;
 
 namespace Projet_Final_a2_wpf
 {
@@ -44,9 +44,20 @@ namespace Projet_Final_a2_wpf
             }
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
-            bitmap.UriSource = new Uri(filename);
-            bitmap.EndInit();
-            ImageViewer.Source = bitmap;
+            try
+            {
+                bitmap.UriSource = new Uri(filename);
+                bitmap.EndInit();
+                ImageViewer.Source = bitmap;
+                MyImage input = new MyImage(filename);
+                input.From_Image_To_File("result.bmp");
+            }
+            catch (Exception) { }
+        }
+
+        private void Save(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void Resize(object sender, RoutedEventArgs e)
@@ -70,5 +81,3 @@ namespace Projet_Final_a2_wpf
         }
     }
 }
-
-

@@ -59,12 +59,19 @@
     <Compile Include="EchelleControl.xaml.cs">
       <DependentUpon>EchelleControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="complet\loading.cs" />
     <Compile Include="MiroirControl.xaml.cs">
       <DependentUpon>MiroirControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="complet\MyImage.cs" />
+    <Compile Include="complet\pixel.cs" />
+    <Compile Include="complet\Point.cs" />
+    <Compile Include="complet\qrcode.cs" />
     <Compile Include="RotationControl.xaml.cs">
       <DependentUpon>RotationControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="complet\threadMachine.cs" />
+    <Compile Include="complet\threadWorker.cs" />
     <Page Include="EchelleControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -115,6 +122,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

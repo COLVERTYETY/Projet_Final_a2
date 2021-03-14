@@ -19,7 +19,7 @@
         <Menu Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3">
             <MenuItem Header="Fichier">
                 <MenuItem Header="Ouvrir" Click="OpenImage"/>
-                <MenuItem Header="Enregistrer"/>
+                <MenuItem Header="Enregistrer" Click="Save"/>
                 <MenuItem Header="Enregistrer sous"/>
                 <MenuItem Header="Informations"/>
             </MenuItem>

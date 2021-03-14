@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,6 +21,9 @@ namespace Projet_Final_a2_wpf
     /// </summary>
     public partial class EchelleControl : UserControl
     {
+        public string MyHeight { get; set; }
+        public string MyWidth { get; set; }
+
         public EchelleControl()
         {
             InitializeComponent();
