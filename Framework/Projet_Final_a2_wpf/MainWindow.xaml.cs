@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using System.IO;
 using System.Windows.Forms;
 using System.ComponentModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using complet;
 
 namespace Projet_Final_a2_wpf
@@ -24,7 +26,6 @@ namespace Projet_Final_a2_wpf
     /// </summary>
     public partial class MainWindow : Window
     {
-
         OpenFileDialog dlg;
         public MainWindow()
         {
@@ -40,17 +41,17 @@ namespace Projet_Final_a2_wpf
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 filename = dlg.FileName;
-
             }
-            BitmapImage bitmap = new BitmapImage();
-            bitmap.BeginInit();
             try
             {
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
                 bitmap.UriSource = new Uri(filename);
                 bitmap.EndInit();
                 ImageViewer.Source = bitmap;
                 MyImage input = new MyImage(filename);
                 input.From_Image_To_File("result.bmp");
+                Console.WriteLine(filename);
             }
             catch (Exception) { }
         }

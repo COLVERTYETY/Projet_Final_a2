@@ -20,10 +20,10 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.Column="0" Content="Angle" Margin="2,5" VerticalContentAlignment="Center"/>
-                <TextBox Grid.Column="1" Margin="5" Name="Angle" VerticalContentAlignment="Center" AcceptsReturn="True"/>
+                <TextBox Grid.Column="1" Margin="5" Name="Angle" VerticalContentAlignment="Center"/>
             </Grid>
             <Button Content="Valider" Margin="2,5" Click="Validate"/>
-            <Image MinHeight="200" MinWidth="200" Margin="5" Name="preview"/>
+            <Image MinHeight="200" MinWidth="200" Margin="5" Name="previewRotation"/>
         </StackPanel>
     </Grid>
 </UserControl>
