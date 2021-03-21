@@ -556,5 +556,54 @@ namespace complet
             }
             return res;
         }
+        public MyImage histogramme(){
+            pixel[] arr = new pixel[256];
+            //first collect all the data from the image
+            for(int i=0;i<height;i++){
+                for(int j=0;j<width;j++){
+                    arr[data[i][j].R]+=1;
+                    arr[data[i][j].G]+=1;
+                    arr[data[i][j].B]+=1;
+                }
+            }
+            //now analyse data to find maximum;
+            pixel maximum = new pixel();
+            for(int i=0;i<arr.Length;i++){
+                if(arr[i].r>maximum.r){
+                    maximum.r=arr[i].r
+                }
+                if(arr[i].g>maximum.g){
+                    maximum.g=arr[i].g
+                }
+                if(arr[i].b>maximum.b){
+                    maximum.b=arr[i].b
+                }
+            }
+            int realmax = max(maximum.r,max(maximum.g,maximum.b));
+            //we may now create the image from this data
+            MyImage result = new MyImage(256,128);
+            for(int i=0;i<256;i++){
+                for(int j=0;j<128;j++){
+                    if(128.0*(arr[i].r/realmax)<j){
+                        result.data[j][i].r=255;
+                    }
+                    if(128.0*(arr[i].g/realmax)<j){
+                        result.data[j][i].g=255;
+                    }
+                    if(128.0*(arr[i].b/realmax)<j){
+                        result.data[j][i].b=255;
+                    }
+                }
+            }
+            return result;
+        }
+        static double max(double a, double b){
+            if(a>b){
+                return a;
+            }else{
+                return b;
+            }
+        }
     }
+    
 }
