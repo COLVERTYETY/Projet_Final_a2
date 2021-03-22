@@ -3,6 +3,7 @@ namespace complet
 {
     public class qrcode
     {
+        private int[] charCapacity = new int[] {25, 20, 16, 10}; // L M Q H
         public MyImage content;
         public qrcode(){
 

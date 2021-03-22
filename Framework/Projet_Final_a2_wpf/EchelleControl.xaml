@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Projet_Final_a2_wpf"
              mc:Ignorable="d">
-    <Grid Background="AliceBlue">
-        <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+    <Grid Background="WhiteSmoke">
+        <StackPanel HorizontalAlignment="Center" Orientation="Vertical" Grid.Row="0">
             <Label Content="Mise à l'échelle" Margin="2,5"/>
             <Label Margin="0" Foreground="Red" Height="0" Name="Warning">
                 <AccessText TextWrapping="WrapWithOverflow">
@@ -20,7 +20,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.Column="0" Content="Hauteur" Margin="2,5" VerticalContentAlignment="Center"/>
-                <TextBox Grid.Column="1" Margin="5" Name="Height" VerticalContentAlignment="Center"/>
+                <TextBox Grid.Column="1" Margin="5" Name="Height" VerticalContentAlignment="Center" Text=""/>
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -29,10 +29,11 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.Column="0" Content="Largeur" Margin="2,5" VerticalContentAlignment="Center"/>
-                <TextBox Grid.Column="1" Margin="5" Name="Width" VerticalContentAlignment="Center"/>
+                <TextBox Grid.Column="1" Margin="5" Name="Width" VerticalContentAlignment="Center" Text=""/>
             </Grid>
+            <Button Content="Preview" Margin="2,5" Click="Preview"/>
+            <Image MinHeight="200" MinWidth="200" MaxHeight="200" MaxWidth="200" Margin="5" Name="previewRescale"/>
             <Button Content="Valider" Margin="2,5" Click="Validate"/>
-            <Image MinHeight="200" MinWidth="200" Margin="5" Name="preview"/>
         </StackPanel>
     </Grid>
 </UserControl>

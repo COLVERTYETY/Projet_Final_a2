@@ -151,7 +151,7 @@ namespace complet
                     file[headers+i+j*multof4width+2] = temp[0];
                 }
             }
-            File.WriteAllBytes(pathName, file);
+            File.WriteAllBytes(pathName, file); 
         }
         public static MyImage magnitudefuse(MyImage a, MyImage b){
             MyImage res = new MyImage(a.width,a.height);
@@ -561,25 +561,25 @@ namespace complet
             //first collect all the data from the image
             for(int i=0;i<height;i++){
                 for(int j=0;j<width;j++){
-                    arr[data[i][j].R]+=1;
-                    arr[data[i][j].G]+=1;
-                    arr[data[i][j].B]+=1;
+                    arr[data[i][j].R].r+=1;
+                    arr[data[i][j].G].g+=1;
+                    arr[data[i][j].B].b+=1;
                 }
             }
             //now analyse data to find maximum;
             pixel maximum = new pixel();
             for(int i=0;i<arr.Length;i++){
                 if(arr[i].r>maximum.r){
-                    maximum.r=arr[i].r
+                    maximum.r = arr[i].r;
                 }
                 if(arr[i].g>maximum.g){
-                    maximum.g=arr[i].g
+                    maximum.g = arr[i].g;
                 }
                 if(arr[i].b>maximum.b){
-                    maximum.b=arr[i].b
+                    maximum.b = arr[i].b;
                 }
             }
-            int realmax = max(maximum.r,max(maximum.g,maximum.b));
+            int realmax = (int)max(maximum.r,max(maximum.g,maximum.b));
             //we may now create the image from this data
             MyImage result = new MyImage(256,128);
             for(int i=0;i<256;i++){

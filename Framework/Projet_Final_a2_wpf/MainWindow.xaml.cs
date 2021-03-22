@@ -39,20 +39,18 @@ namespace Projet_Final_a2_wpf
         static private MyImage imageToMyImage;
 
         static public MyImage ImageToMyImage{ get { return imageToMyImage; } set {
-                try
-                {
-                    test.Source = null;
-                    File.Delete("result.bmp");
-                    value.From_Image_To_File("result.bmp");
-                    imageToMyImage = value;
-                    BitmapImage bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.UriSource = new Uri(Directory.GetCurrentDirectory() + "/result.bmp");
-                    bitmap.EndInit();
-                    test.Source = bitmap;
-                    Console.WriteLine("succesfuly saved an image");
-                }
-                catch(Exception error) { Console.WriteLine(error.Message); }
+                value.From_Image_To_File("result.bmp");
+                imageToMyImage = value;
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                bitmap.UriSource = new Uri(Directory.GetCurrentDirectory() + "/result.bmp");
+                bitmap.EndInit();
+                test.Source = bitmap;
+                Console.WriteLine("succesfuly saved an image");
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
             }
         }
 
@@ -64,7 +62,9 @@ namespace Projet_Final_a2_wpf
             {
                 filename = dlg.FileName;
             }
-            ImageToMyImage = new MyImage(filename);
+            try
+            { ImageToMyImage = new MyImage(filename); }
+            catch(Exception) { }
         }
 
         private void Save(object sender, RoutedEventArgs e)

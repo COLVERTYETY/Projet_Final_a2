@@ -22,8 +22,9 @@
                 <Label Grid.Column="0" Content="Angle" Margin="2,5" VerticalContentAlignment="Center"/>
                 <TextBox Grid.Column="1" Margin="5" Name="Angle" VerticalContentAlignment="Center"/>
             </Grid>
+            <Button Content="Preview" Margin="2,5" Click="Preview"/>
+            <Image VerticalAlignment="Center" HorizontalAlignment="Center" MinHeight="200" MinWidth="200" MaxHeight="200" MaxWidth="200" Margin="5" Name="previewRotation"/>
             <Button Content="Valider" Margin="2,5" Click="Validate"/>
-            <Image MinHeight="200" MinWidth="200" Margin="5" Name="previewRotation"/>
         </StackPanel>
     </Grid>
 </UserControl>

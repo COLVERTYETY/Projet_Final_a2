@@ -5,13 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Projet_Final_a2_wpf"
              mc:Ignorable="d">
-    <Grid Background="AliceBlue">
+    <Grid Background="WhiteSmoke">
         <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
             <Label Content="Symétrie" Margin="2,5"/>
             <CheckBox Content="Vertical" Name="VerticalCheck" Margin="2,5" Click="Vertical_Click" IsChecked="True"/>
             <CheckBox Content="Horizontal" Name="HorizontalCheck" Margin="2,5" Click="Horizontal_Click"/>
-            <Button Content="Valider" Margin="2,5"/>
-            <Image MinHeight="200" MinWidth="200" Margin="5" Name="preview"/>  
+            <Button Content="Preview" Margin="2,5" Click="Preview"/>
+            <Image MinHeight="200" MinWidth="200" MaxHeight="200" MaxWidth="200" Margin="5" Name="previewMirror"/>
+            <Button Content="Valider" Margin="2,5" Click="Validate"/>
         </StackPanel>
     </Grid>
 </UserControl>

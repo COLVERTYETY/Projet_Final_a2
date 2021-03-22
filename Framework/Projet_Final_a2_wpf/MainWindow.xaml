@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Projet_Final_a2_wpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid Name="mainGrid">
+    <Grid Name="mainGrid" Background="WhiteSmoke">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -45,12 +45,13 @@
         <ContentControl Grid.Column="0" Grid.Row="1"
                         Name="theUserControl"
                         HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch"/>
+                        VerticalAlignment="Stretch"
+                        ClipToBounds="False"/>
         <GridSplitter Grid.Row="1" Grid.Column="1" Margin="2,0,2,0"
-                  Width="3" Background="DarkSlateBlue" 
+                  Width="1.5" Background="Gray" 
                   VerticalAlignment="Stretch" 
                   HorizontalAlignment="Center"/>
-        <Image HorizontalAlignment="Right"
+        <Image HorizontalAlignment="Center"
                VerticalAlignment="Center"
                Margin="5"
                Name="ImageViewer"
