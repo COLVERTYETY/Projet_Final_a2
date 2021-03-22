@@ -32,6 +32,28 @@ namespace Projet_Final_a2_wpf
             InitializeComponent();
             dlg = new OpenFileDialog();
             dlg.Filter = "Image files (*.bmp)|*.bmp";
+            test = ImageViewer;
+        }
+
+        static private Image test;
+        static private MyImage imageToMyImage;
+
+        static public MyImage ImageToMyImage{ get { return imageToMyImage; } set {
+                try
+                {
+                    test.Source = null;
+                    File.Delete("result.bmp");
+                    value.From_Image_To_File("result.bmp");
+                    imageToMyImage = value;
+                    BitmapImage bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(Directory.GetCurrentDirectory() + "/result.bmp");
+                    bitmap.EndInit();
+                    test.Source = bitmap;
+                    Console.WriteLine("succesfuly saved an image");
+                }
+                catch(Exception error) { Console.WriteLine(error.Message); }
+            }
         }
 
         private void OpenImage(object sender, RoutedEventArgs e)
@@ -42,18 +64,7 @@ namespace Projet_Final_a2_wpf
             {
                 filename = dlg.FileName;
             }
-            try
-            {
-                BitmapImage bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri(filename);
-                bitmap.EndInit();
-                ImageViewer.Source = bitmap;
-                MyImage input = new MyImage(filename);
-                input.From_Image_To_File("result.bmp");
-                Console.WriteLine(filename);
-            }
-            catch (Exception) { }
+            ImageToMyImage = new MyImage(filename);
         }
 
         private void Save(object sender, RoutedEventArgs e)

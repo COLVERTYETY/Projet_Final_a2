@@ -29,35 +29,30 @@ namespace Projet_Final_a2_wpf
 
         private void Validate(object sender, RoutedEventArgs e)
         {
-            int angleDegres = 0;
+            double angleDegres = 0;
             try
             {
-                angleDegres = Convert.ToInt32(Angle.Text);
+                angleDegres = Convert.ToDouble(Angle.Text);
                 angleDegres = angleDegres % 360;
                 Warning.Height = 0;
                 Warning.Margin = new System.Windows.Thickness(0, 0, 0, 0);
                 Console.WriteLine("got angle");
+                try
+                {
+                    MyImage tempImage = MainWindow.ImageToMyImage;
+                    tempImage = tempImage.rotate(angleDegres);
+                    MainWindow.ImageToMyImage = tempImage;
+                }
+                catch (Exception error)
+                {
+                    Console.WriteLine(error.Message);
+                }
             }
             catch (Exception)
             {
                 Warning.Height = Double.NaN;
                 Warning.Margin = new System.Windows.Thickness(2.5, 2.5, 2.5, 2.5);
-                Console.WriteLine("didn't get angle");
-            }
-            try
-            {
-                MyImage tempImage = new MyImage("result.bmp");
-                tempImage.rotate(angleDegres).From_Image_To_File("temp.bmp");
-                /*BitmapImage temp = new BitmapImage();
-                temp.BeginInit();
-                temp.UriSource = new Uri("temp.bmp", UriKind.Relative);
-                temp.EndInit();*/
-                previewRotation.Source = new BitmapImage(new Uri("pack://application:,,,/Projet_Final_a2_wpf;component/temp.bmp"));
-                Console.WriteLine("created preview");
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("didn't create preview");
+                Console.WriteLine("didn't work");
             }
         }
     }

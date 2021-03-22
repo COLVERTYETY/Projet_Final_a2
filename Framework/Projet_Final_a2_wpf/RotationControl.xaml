@@ -5,12 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Projet_Final_a2_wpf"
              mc:Ignorable="d">
-    <Grid Background="AliceBlue">
+    <Grid Background="WhiteSmoke">
         <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
             <Label Content="Rotation" Margin="2,5"/>
             <Label Margin="0" Foreground="Red" Height="0" Name="Warning">
                 <AccessText TextWrapping="WrapWithOverflow">
-                    La hauteur et la largeur doivent être des entiers positifs
+                    L'angle doit être un nombre
                 </AccessText>
             </Label>
             <Grid>
