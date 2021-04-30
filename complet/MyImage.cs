@@ -66,6 +66,15 @@ namespace complet
                 }
             }
         }
+        public MyImage(int[,] content){
+            data = new pixel[content.GetLength(0)][];
+            for(int i=0;i<content.GetLength(0);i++){
+                data[i] = new pixel[content.GetLength(1)];
+                for(int j=0;j<content.GetLength(1);j++){
+                    data[i][j] = new pixel(255-255*content[i,j]);
+                }
+            }
+        }
         public override string ToString()
         {
             StringBuilder temp = new StringBuilder(" ");

@@ -17,17 +17,18 @@ namespace complet
         }
         static void Main(string[] args)
         {
-            string path="./images/";
-            MyImage image=new MyImage(8000, 8000);
-            Stopwatch chrono = new Stopwatch();
-            Console.WriteLine("coucou");
-            threadMachine machine = new threadMachine(image);
-            machine.optimiseThreadCount();
-            chrono.Start();
-            // image.Mandelbrot(0.22,0.10,0.32,-0.10).From_Image_To_File($"{path}test.bmp");
-            machine.Mandelbrot(0.22,0.10,0.32,-0.10).From_Image_To_File($"{path}test.bmp");
-            chrono.Stop();
-            Console.WriteLine(chrono.Elapsed);
+            QRcode.Mode1L("HELLO WORLD");
+            // string path="./images/";
+            // MyImage image=new MyImage(8000, 8000);
+            // Stopwatch chrono = new Stopwatch();
+            // Console.WriteLine("coucou");
+            // threadMachine machine = new threadMachine(image);
+            // machine.optimiseThreadCount();
+            // chrono.Start();
+            // // image.Mandelbrot(0.22,0.10,0.32,-0.10).From_Image_To_File($"{path}test.bmp");
+            // machine.Mandelbrot(0.22,0.10,0.32,-0.10).From_Image_To_File($"{path}test.bmp");
+            // chrono.Stop();
+            // Console.WriteLine(chrono.Elapsed);
             // if(Directory.Exists(path)){
             //     string[] thefiles = Directory.GetFiles(path,"*.bmp");
             //     if(thefiles.Length>0){
