@@ -17,7 +17,7 @@ namespace complet
         }
         static void Main(string[] args)
         {
-            QRcode.Mode1L("HELLO WORLD");
+            QRcode.Mode2L("A");
             // string path="./images/";
             // MyImage image=new MyImage(8000, 8000);
             // Stopwatch chrono = new Stopwatch();

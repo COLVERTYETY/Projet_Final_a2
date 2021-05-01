@@ -10,6 +10,33 @@ namespace complet
         static int char1L = 25;
         static int char2L = 47;
         static int alphanumericmode = 2;
+        static int[,] m2 = new int[25,25]{
+            {  1,  1,  1,  1,  1,  1,  1,000,  1,296,295,202,201,200,199,111,110,109,108, 67, 66, 65, 64,  3,  2},
+            {  1,  0,  0,  0,  0,  0,  1,000,  1,294,293,204,203,198,197,113,112,107,106, 69, 68, 63, 62,  5,  4},
+            {  1,  0,  1,  1,  1,  0,  1,000,  1,292,291,206,205,196,195,115,114,105,104, 71, 70, 61, 60,  7,  6},
+            {  1,  0,  1,  1,  1,  0,  1,000,  0,290,289,208,207,194,193,117,116,103,102, 73, 72, 59, 58,  9,  8},
+            {  1,  0,  1,  1,  1,  0,  1,000,  1,288,287,210,209,192,191,118,  1,  1,  1,  1,  1, 57, 56, 11, 10},
+            {  1,  0,  0,  0,  0,  0,  1,000,  1,286,285,212,211,190,189,119,  1,  0,  0,  0,  1, 55, 54, 13, 12},
+            {  1,  1,  1,  1,  1,  1,  1,000,  1,284,283,214,213,188,187,120,  1,  0,  1,  0,  1, 53, 52, 15, 14},
+            {000,000,000,000,000,000,  0,000,  1,282,281,216,215,186,185,121,  1,  0,  0,  0,  1, 51, 50, 17, 16},
+            {360,359,330,329,328,327,  1,298,297,280,279,218,217,184,183,122,  1,  1,  1,  1,  1, 49, 48, 19, 18},
+            {358,357,332,331,326,325,  0,300,299,278,277,220,219,182,181,124,123,101,100, 75, 74, 47, 46, 21, 20},
+            {356,355,334,333,324,323,  1,302,301,276,275,222,221,180,179,126,125, 99, 98, 77, 76, 45, 44, 23, 22},
+            {354,353,336,335,322,321,  0,304,303,274,273,224,223,178,177,128,127, 97, 96, 79, 78, 43, 42, 25, 24},
+            {352,351,338,337,320,319,  1,306,305,272,271,226,225,176,175,130,129, 95, 94, 81, 80, 41, 40, 27, 26},
+            {350,349,340,339,318,317,  0,308,307,270,269,228,227,174,173,132,131, 93, 92, 83, 82, 39, 38, 29, 28},
+            {348,347,342,341,316,315,  1,310,309,268,267,230,229,172,171,134,133, 91, 90, 85, 84, 37, 36, 31, 30},
+            {346,345,344,343,314,313,  0,312,311,266,265,232,231,170,169,136,135, 89, 88, 87, 86, 35, 34, 33, 32},
+            {  1,  1,  1,  0,  1,  1,  1,  1,  1,264,263,234,233,168,167,138,137,  1,  1,  0,  0,  0,  1,  0,  0},
+            {  0,  0,  0,  0,  0,  0,  0,000,  1,262,261,236,235,166,165,140,139,  0,  0,  0,  0,  0,  0,  0,  0},
+            {  1,  1,  1,  1,  1,  1,  1,000,  1,000,001,  0,  1,  0,  1,  0,  1,  0,  1,  1,  1,  1,  1,  1,  1},
+            {  1,  0,  0,  0,  0,  0,  1,000,  0,260,259,238,237,164,163,142,141,  0,  1,  0,  0,  0,  0,  0,  1},
+            {  1,  0,  1,  1,  1,  0,  1,000,  0,258,257,240,239,162,161,144,143,  0,  1,  0,  1,  1,  1,  0,  1},
+            {  1,  0,  1,  1,  1,  0,  1,000,  0,256,255,242,241,160,159,146,145,  0,  1,  0,  1,  1,  1,  0,  1},
+            {  1,  0,  1,  1,  1,  0,  1,000,  1,254,253,244,243,158,157,148,147,  0,  1,  0,  1,  1,  1,  0,  1},
+            {  1,  0,  0,  0,  0,  0,  1,000,  0,252,251,246,245,156,155,150,149,  0,  1,  0,  0,  0,  0,  0,  1},
+            {  1,  1,  1,  1,  1,  1,  1,000,  0,250,249,248,247,154,153,152,151,  0,  1,  1,  1,  1,  1,  1,  1}
+        };
         static int[,] m1 = new int[21,21]{
             {  1,  1,  1,  1,  1,  1,  1,  0,  1,177,176, 99, 98,97,96,51,50,49,48, 3, 2},
             {  1,  0,  0,  0,  0,  0,  1,  0,  1,175,174,101,100,95,94,53,52,47,46, 5, 4},
@@ -33,13 +60,13 @@ namespace complet
             {  1,  0,  0,  0,  0,  0,  1,  0,  0,141,140,135,134, 0, 1, 0, 0, 0, 0, 0, 1},
             {  1,  1,  1,  1,  1,  1,  1,  0,  0,139,138,137,136, 0, 1, 1, 1, 1, 1, 1, 1}
         };
-        static public string pad152(string content){
+        static public string pad(string content,int maxx){
             string res = content;
-            if(res.Length<152){
-                if(res.Length-4<152){
+            if(res.Length<maxx){
+                if(res.Length-4<maxx){
                     res+="0000";
                 }else{
-                    res.PadRight(152,'0');
+                    res.PadRight(maxx,'0');
                 }
             }
             return res;
@@ -77,7 +104,6 @@ namespace complet
             return res;
         }
         static public int[] encodeText(string text){
-            text=text.ToUpper();
             int[] res=new int[(text.Length+1)/2];
             int val=0;
             for(int i=0;i<text.Length;i++){
@@ -128,9 +154,9 @@ namespace complet
             Console.WriteLine(string.Join(" ",res));
             return res;
         }
-        static public string padwith236and17(string content){
+        static public string padwith236and17(string content,int maxx){
             int i=0;
-            while(content.Length<152){
+            while(content.Length<maxx){
                 if(i%2==0){
                     content+=binToString(236,8);
                 }else{
@@ -169,7 +195,11 @@ namespace complet
                     if(tempalte[i,j]<2){
                         res[i,j] = tempalte[i,j];
                     }else{
-                        res[i,j] =Math.Abs((int)content[tempalte[i,j]-2]-48 - (i+j+1)%2);
+                        if(tempalte[i,j]<content.Length){
+                            res[i,j] = Math.Abs((int)content[tempalte[i,j]-2]-48 - (i+j+1)%2);
+                        }else{
+                            res[i,j] = (i+j+1)%2;
+                        }
                     }
                 }
             }
@@ -192,11 +222,11 @@ namespace complet
                 data+=binToString(binoftext[binoftext.Length-1],11);
             }
             // terminaison
-            data = pad152(data);
+            data = pad(data,152);
             // pad 8
             data = padto8(data);
             //fill with 236 17
-            data = padwith236and17(data);
+            data = padwith236and17(data,152);
             // encode with reedsalomon
             byte[]temp = bytesfromstring(data);
             //byte[] temp = stringToBytes(data);
@@ -205,21 +235,41 @@ namespace complet
             Console.WriteLine(string.Join(' ',ecc));
             data+= binToString(ecc);
             //fill all
-            string comp = "0010000001011011000010110111100011010001011100101101110001001101010000110100000011101100000100011110110000010001111011000001000111101100000100011110110011010001111011111100010011001111010011101100001101101101";
-            Stack eror = new Stack();
-            for(int i=0;i<comp.Length;i++){
-                if(data[i]!=comp[i]){
-                    Console.BackgroundColor = ConsoleColor.Red;
-                    eror.Push(i);
-                }
-                Console.Write(data[i]);
-                Console.ResetColor();
-            }
-            Console.WriteLine();
-            while(eror.Count>0){
-                Console.WriteLine(eror.Pop());
-            }
             MyImage k = new MyImage(filler(m1,data));
+            k.From_Image_To_File("test.bmp");
+            return data;
+        }
+        static public string Mode2L(string text){
+            string data = "";
+            // encoding mode
+            data+= binToString(alphanumericmode,4);
+            // number of characters
+            data+= binToString(text.Length,9);
+            // encoded etxt
+            int[] binoftext = encodeText(text);
+            for(int i=0;i<binoftext.Length-1;i++){
+                data+=binToString(binoftext[i],11);
+            }
+            if(text.Length%2==1){
+                data+=binToString(binoftext[binoftext.Length-1],6);
+            }else{
+                data+=binToString(binoftext[binoftext.Length-1],11);
+            }
+            // terminaison
+            data = pad(data,34*8);
+            // pad 8
+            data = padto8(data);
+            //fill with 236 17
+            data = padwith236and17(data,34*8);
+            // encode with reedsalomon
+            byte[]temp = bytesfromstring(data);
+            //byte[] temp = stringToBytes(data);
+            Console.WriteLine(string.Join(' ',temp));
+            byte[] ecc = ReedSolomonAlgorithm.Encode(temp, 10, ErrorCorrectionCodeType.QRCode);
+            Console.WriteLine(string.Join(' ',ecc));
+            data+= binToString(ecc);
+            //fill all
+            MyImage k = new MyImage(filler(m2,data));
             k.From_Image_To_File("test.bmp");
             return data;
         }
