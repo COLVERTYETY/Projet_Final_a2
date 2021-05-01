@@ -70,22 +70,9 @@ namespace complet
             return res;
         }
         static public string binToString(byte[] bin){
-            string res="";
-            string temp="";
-            int tbin=0;
-            for(int i=0;i<bin.Length;i++){
-                tbin = bin[bin.Length-1-i];
-                for(int k=0;k<8;k++){
-                    if((tbin & 1) == 1){
-                        temp+="1";
-                    }else{
-                        temp+="0";
-                    }
-                    tbin = tbin >>1;
-                }
-                for(int j=0;j<temp.Length;j++){
-                    res+= temp[temp.Length-1-j];
-                }
+            string res ="";
+            foreach(byte b in bin){
+                res+=Convert.ToString(b,2).PadLeft(8,'0');
             }
             return res;
         }
@@ -168,6 +155,13 @@ namespace complet
             Console.WriteLine();
             return res;
         }
+        static public byte[] bytesfromstring(string text){
+            byte[] res =new byte[text.Length/8];
+            for(int i=0;i<text.Length/8;i++){
+                res[i] = Convert.ToByte(text.Substring(8*i,8),2);
+            }
+            return res;
+        }
         static public int[,] filler(int[,] tempalte, string content){
             int[,] res = new int[tempalte.GetLength(0),tempalte.GetLength(1)];
             for(int i=0;i<tempalte.GetLength(0);i++){
@@ -204,15 +198,29 @@ namespace complet
             //fill with 236 17
             data = padwith236and17(data);
             // encode with reedsalomon
-            byte[] temp = stringToBytes(data);
+            byte[]temp = bytesfromstring(data);
+            //byte[] temp = stringToBytes(data);
             Console.WriteLine(string.Join(' ',temp));
             byte[] ecc = ReedSolomonAlgorithm.Encode(temp, 7, ErrorCorrectionCodeType.QRCode);
             Console.WriteLine(string.Join(' ',ecc));
             data+= binToString(ecc);
             //fill all
+            string comp = "0010000001011011000010110111100011010001011100101101110001001101010000110100000011101100000100011110110000010001111011000001000111101100000100011110110011010001111011111100010011001111010011101100001101101101";
+            Stack eror = new Stack();
+            for(int i=0;i<comp.Length;i++){
+                if(data[i]!=comp[i]){
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    eror.Push(i);
+                }
+                Console.Write(data[i]);
+                Console.ResetColor();
+            }
+            Console.WriteLine();
+            while(eror.Count>0){
+                Console.WriteLine(eror.Pop());
+            }
             MyImage k = new MyImage(filler(m1,data));
             k.From_Image_To_File("test.bmp");
-            Console.WriteLine(data);
             return data;
         }
 
