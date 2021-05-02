@@ -17,7 +17,8 @@ namespace complet
         }
         static void Main(string[] args)
         {
-            QRcode.Mode2L("A");
+            //QRcode.Mode2L("Hello world").From_Image_To_File("test.bmp");
+            Console.WriteLine(string.Join(':',new char[100]));
             // string path="./images/";
             // MyImage image=new MyImage(8000, 8000);
             // Stopwatch chrono = new Stopwatch();

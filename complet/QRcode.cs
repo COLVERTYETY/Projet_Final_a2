@@ -103,6 +103,13 @@ namespace complet
             }
             return res;
         }
+        static public string stringfrombytearray(byte[] data){
+            string res="";
+            foreach(byte b in data){
+                res+=Convert.ToChar(b);
+            }
+            return res;
+        }
         static public int[] encodeText(string text){
             int[] res=new int[(text.Length+1)/2];
             int val=0;
@@ -151,7 +158,6 @@ namespace complet
                 }
                 
             }
-            Console.WriteLine(string.Join(" ",res));
             return res;
         }
         static public string padwith236and17(string content,int maxx){
@@ -177,8 +183,6 @@ namespace complet
                 res[i/8] = byteval;
                 byteval=0;
             }
-            
-            Console.WriteLine();
             return res;
         }
         static public byte[] bytesfromstring(string text){
@@ -205,7 +209,52 @@ namespace complet
             }
             return res;
         }
-        static public string Mode1L(string text){
+        static public int[,] tointmat(MyImage input){
+            int[,] res= new int[input.width,input.height];
+            for(int i=0;i<input.height;i++){
+                for(int j=0;j<input.width;j++){
+                    res[j,i] = (int)input.data[i][j].avg;
+                }
+            }
+            return res;
+        }
+        static public string readTemplate(int[,] template, int [,] data){
+            char[] res = new char[360];
+            for(int i=0;i<template.GetLength(0);i++){
+                for(int j=0;j<template.GetLength(1);j++){
+                    if(template[i,j]>1){
+                        res[template[i,j]-2] = (char)(Math.Abs( data[i,j]-48-(i+j+1)%2));
+                    }
+                }
+            }
+            string output="";
+            foreach(char c in res){
+                if(c=='1' || c=='0'){
+                    output+=c;
+                }
+            }
+            return output;
+        }
+        static public string decodeM1L(MyImage imageofqr){
+            string output;
+            int[,] data = tointmat(imageofqr);
+            string raw = readTemplate(m1,data);
+            byte[] bytes = bytesfromstring(raw);
+            byte[] ecc = new byte[7];
+            byte[] msg = new byte[bytes.Length-7];
+            for(int i=0;i<bytes.Length;i++){
+                if(i>=bytes.Length-7){
+                    ecc[i-bytes.Length] = bytes[i];
+                }
+                else{
+                    msg[i] = bytes[i];
+                }
+            }
+            bytes = ReedSolomonAlgorithm.Decode(msg,ecc,ErrorCorrectionCodeType.QRCode);
+            output = stringfrombytearray(bytes);
+            return output;
+        }
+        static public MyImage Mode1L(string text){
             string data = "";
             // encoding mode
             data+= binToString(alphanumericmode,4);
@@ -230,16 +279,12 @@ namespace complet
             // encode with reedsalomon
             byte[]temp = bytesfromstring(data);
             //byte[] temp = stringToBytes(data);
-            Console.WriteLine(string.Join(' ',temp));
             byte[] ecc = ReedSolomonAlgorithm.Encode(temp, 7, ErrorCorrectionCodeType.QRCode);
-            Console.WriteLine(string.Join(' ',ecc));
             data+= binToString(ecc);
             //fill all
-            MyImage k = new MyImage(filler(m1,data));
-            k.From_Image_To_File("test.bmp");
-            return data;
+            return new MyImage(filler(m1,data));
         }
-        static public string Mode2L(string text){
+        static public MyImage Mode2L(string text){
             string data = "";
             // encoding mode
             data+= binToString(alphanumericmode,4);
@@ -264,14 +309,10 @@ namespace complet
             // encode with reedsalomon
             byte[]temp = bytesfromstring(data);
             //byte[] temp = stringToBytes(data);
-            Console.WriteLine(string.Join(' ',temp));
             byte[] ecc = ReedSolomonAlgorithm.Encode(temp, 10, ErrorCorrectionCodeType.QRCode);
-            Console.WriteLine(string.Join(' ',ecc));
             data+= binToString(ecc);
             //fill all
-            MyImage k = new MyImage(filler(m2,data));
-            k.From_Image_To_File("test.bmp");
-            return data;
+            return new MyImage(filler(m2,data));
         }
 
     }
