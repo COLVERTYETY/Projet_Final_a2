@@ -546,6 +546,48 @@ namespace complet
             }
             return res;
         }
+        public MyImage histogram(){
+            MyImage res = new MyImage(256,128);
+            int[] histR = new int[256];
+            int[] histG = new int[256];
+            int[] histB = new int[256];
+            //collect data
+            for(int i=0;i<height;i++){
+                for(int j=0;j<width;j++){
+                    histR[this.data[i][j].R-1]+=1;
+                    histG[this.data[i][j].G-1]+=1;
+                    histB[this.data[i][j].B-1]+=1;
+                }
+            }
+            //get max value
+            int maxofall=0;
+            foreach(int h in histR){
+                if(h>maxofall)
+                    {maxofall=h;}
+            }
+            foreach(int h in histG){
+                if(h>maxofall)
+                    {maxofall=h;}
+            }
+            foreach(int h in histB){
+                if(h>maxofall)
+                    {maxofall=h;}
+            }
+            //draw the histogramm with the adjustedacle
+            int ratio = 128/maxofall;
+            for(int i=0;i<256;i++){
+                for(int j=0;j<histR[i]*ratio;i++){
+                    res.data[j][i].R = 255;
+                }
+                for(int j=0;j<histG[i]*ratio;i++){
+                    res.data[j][i].G = 255;
+                }
+                for(int j=0;j<histB[i]*ratio;i++){
+                    res.data[j][i].B = 255;
+                }
+            }
+            return res;
+        }
         static byte[] Convertir_Int_To_Endian( UInt32 input, int nbits){
             byte[] res = new byte[4];
             for(int i=0;i<nbits;i++){

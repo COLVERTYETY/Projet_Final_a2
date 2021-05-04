@@ -111,6 +111,7 @@ namespace complet
             return res;
         }
         static public int[] encodeText(string text){
+            text = text.ToUpper();
             int[] res=new int[(text.Length+1)/2];
             int val=0;
             for(int i=0;i<text.Length;i++){
